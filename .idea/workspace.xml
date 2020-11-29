@@ -6,21 +6,20 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83ad8040-245b-40e8-b001-3a6992281daa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/test211.html" beforeDir="false" afterPath="$PROJECT_DIR$/test211.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microtest.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/需求分析.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/head/loader.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/head/loader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/head/loader_admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/head/loader_admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/head/loader_teacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/head/loader_teacher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stu_file.html" beforeDir="false" afterPath="$PROJECT_DIR$/stu_file.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stu_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/stu_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stu_word_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/stu_word_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,14 +49,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../教师园地/新建文件夹/teacher" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/admin_teach.html" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\学习\开发\micotheory\assets\js" />
       <recent name="D:\学习\开发\micotheory" />
+      <recent name="D:\学习\开发\micotheory\assets\js" />
       <recent name="C:\Users\hwb\Desktop\前端源码\闭曈彤" />
     </key>
   </component>
@@ -113,7 +112,7 @@
       <workItem from="1605620026055" duration="10295000" />
       <workItem from="1605860433175" duration="10414000" />
       <workItem from="1606272371924" duration="643000" />
-      <workItem from="1606549647164" duration="3207000" />
+      <workItem from="1606549647164" duration="7645000" />
     </task>
     <servers />
   </component>

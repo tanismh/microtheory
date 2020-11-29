@@ -1,5 +1,5 @@
 document.getElementById("header").innerHTML="<nav class=\"navbar navbar-default top-navbar\" role=\"navigation\">\
-                <a class=\"navbar-brand\" style=\" width: 290px;\"href=\"index.html\"><strong><i class=\"icon fa fa-plane\"></i> 读书会在线学习系统</strong></a>\
+                <a class=\"navbar-brand\" style=\" width: 290px;\"href=\"stu_center.html\"><strong><i class=\"icon fa fa-plane\"></i> 读书会在线学习系统</strong></a>\
                 <div id=\"sideNav\" href=\"#\"><i class=\"fa fa-bars icon\"></i></div><form class=\"navbar-form navbar-right\"  style=\"margin-top:12px;\">\
       </form>\
       <ul class=\"nav navbar-top-links navbar-right\">\

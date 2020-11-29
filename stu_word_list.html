@@ -71,7 +71,7 @@
 <!--    <script src="assets/js/dataTables/jquery.dataTables.js"></script>-->
     <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
     <script>
-  					var host="http://10.21.30.218:8080";
+  			var host="http://10.21.30.218:8080";
             $(document).ready(function () {
                 var id = window.paramFromParent;
                 $.ajax({
@@ -94,6 +94,7 @@
   						
   	//显示读书心得列表
   	function showList(data) {
+  	    console.log(data)
       $("#wordList").html("");
       $.each(data.data, function(i, value) {
         $("#wordList").append(

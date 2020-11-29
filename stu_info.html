@@ -134,7 +134,7 @@ body {
                       <span>x</span>
                   </div>
                   <div class="cont">
-                      <img src="assets/img/picture.jpg"/>
+                      <img id="myPhoto" src="assets/img/picture.jpg"/>
                   </div>
               </div>
                   <div id="mask_shadow"></div>
@@ -225,9 +225,9 @@ body {
             </div> 
 
             <div class="form-group">
-              <label for="username" class="col-sm-2 control-label">个人简历</label>
+              <label class="col-sm-2 control-label">个人简历</label>
               <div class="col-sm-10">
-                <button class="btn btn-default" id="download" style="margin-right: 5px;">下载到本地</button>
+                <button class="btn btn-default" style="margin-right: 5px;"> <a id="download_a" style="text-decoration:none;color: black" target="_blank" href="" >下载到本地</a></button>
               </div>            
             </div> 
             
@@ -331,7 +331,7 @@ body {
             <div class="form-group">
               <label for="username" class="col-sm-4 control-label">读书心得</label>
               <div class="col-sm-8">
-                <button class="btn btn-primary" onclick="window.location.href='stu_word_view.html'">查 看</button>
+                <button class="btn btn-primary" id="showDetail" onclick="parent.location.href='stu_word.html'">查 看</button>
               </div>
             </div>
 
@@ -340,28 +340,32 @@ body {
       </div>
 
 <script type="text/javascript">
+    $.ajax({
+        type : "GET",
+        url : "http://10.21.30.218:8080/api/v3/student/archive",
+        data: {userId:1},
+        // contentType : "application/json",
+        success : function(data) {
+            // alert("d")
+            // console.log(data);
+            if (data.code == "200") {
+                showData(data);
+            }
+        },
+        error :function (res) {
+            console.log(res)
+            // sweetAlert("警告", "服务器连接出错！");
+        }
+    });
   var host="http://10.21.30.218:8080";
 //	获取学生个人信息
 	$(document).ready(function() {
       var id = window.paramFromParent;
-    $.ajax({
-      type : "GET",
-      url : host+"/api/students/info",
-      data:{studentId:id},
-      contentType : "application/json",
-      success : function(data) {
-        console.log(data);
-        if (data.code == "200") {
-          showData(data);
-        }
-      },
-      error :function () {
-        sweetAlert("警告", "服务器连接出错！");
-      }
-    });
+
   });
   
 	function showData(data){
+	    console.log(data)
 //		alert('showData')
 //        alert(data.data.studentName);
       $("#name").html(data.data.studentName);
@@ -371,14 +375,16 @@ body {
       $("#birthday").html(data.data.birth);
       $("#nation").html(data.data.nation);
       $("#origin").html(data.data.nativePlace);
-      $("#institute").html(data.data.collegeName);
+      $("#institute").html(data.data.college);
       $("#class").html(data.data.className);
       $("#education").html(data.data.education);
       $("#teacher1name").html(data.data.firstTeacherName);
-      $("#teacher1phone").html(data.data.firstTeacherPhone);
+      $("#teacher1phone").html(data.data.firstTeacherPhoneNumber);
       $("#teacher2name").html(data.data.secondTeacherName);
-      $("#teacher2phone").html(data.data.secondTeacherPhone);
+      $("#teacher2phone").html(data.data.secondTeacherPhoneNumber);
       $("#degree").html(data.data.degree);
+      $("#myPhoto").attr("src", data.data.photoUrl)
+      $("#download_a").attr("href", data.data.resumeUrl)
 
       //转化时间格式
       function getDate(str){
