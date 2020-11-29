@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>全部课程</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <link href="assets/css/video-js.css" rel="stylesheet"> 
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script>
+  
+  <script>
+    function isEmptyObject(obj) {
+      for (var key in obj) {
+        return false;
+      }
+      return true;
+    }
+    $(document).ready(function(){
+
+      $("#sideNav").click(function(){
+
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});
+          
+        }
+        else{
+            $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+
+
+  });
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+
+      <div class="header"> 
+        <ol class="breadcrumb">
+          <!-- <li><a href="#">Home</a></li> -->
+          <li><a href="#">首页</a></li>
+          <li class="active">全部课程</li>
+          <div class="dropdown navbar-right" style="position:relative;bottom:8px;right:10px;">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    按类别搜索
+			  <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			    <li><a href="#">毛概</a></li>
+			    <li><a href="#">历史</a></li>
+			    <li><a href="#">马原</a></li>
+			  </ul>
+			</div> 
+        </ol> 
+      </div>
+      <div id="page-inner">
+
+      <div class="row">
+
+
+
+
+    </div><!--/.row-->
+
+
+    <div id="footer"></div>
+
+    </div><!--/.pager-inner-->
+
+    </div><!--/.page-wrapper-->
+
+    </div><!--/.wrapper-->
+
+  <script>
+    var pageObj={};
+
+    var url = decodeURI(location.search); //获取url中"?"符后的字串 ('?modFlag=business&role=1')
+    if ( url.indexOf( "?" ) != -1 ) {
+      var str = url.substr( 1 ); //substr()方法返回从参数值开始到结束的字符串；
+      var strs = str.split( "&" );
+      for ( var i = 0; i < strs.length; i++ ) {
+        pageObj[ strs[ i ].split( "=" )[ 0 ] ] = ( strs[ i ].split( "=" )[ 1 ] );
+      }
+    }
+    if (isEmptyObject(pageObj)){
+      $.ajax({
+        type : "get",
+        url : "http://10.21.30.218:8080"+"/api/v3/media/",
+        contentType : "application/json",
+        data: "pageNum=1&pageSize=100",
+        success : function(res) {
+          console.log(res)
+          var data=res.data
+          $.each(data.list,function(i,item){
+            $(".row").append("<div class=\"col-xs-6 col-md-3\">\n" +
+                    "        <div class=\"panel panel-default\">\n" +
+                    "          <div class=\"panel-body easypiechart-panel\">\n" +
+                    "            <a href=\"./stu_video_learn.html?id="+item.id+"\"><img src=\"assets/img/lesson2.jpg\" alt=\"...\" class=\"img-rounded col-xs-12 col-md-12\"></a>\n" +
+                    "            <h4 style=\"text-align: left;\" class=\"col-xs-12 col-md-12\">"+item.name+"</h4>\n" +
+                    "            <h5 style=\"text-align: left;\" class=\"col-xs-6 col-md-6\">讲师：张小明</h5>\n" +
+                    "            <h5 style=\"text-align: right;\" class=\"col-xs-6 col-md-6\"><a href=\"./stu_video_learn.html?id="+item.id+"\">开始观看</a></h5>\n" +
+                    "            <a href=\"./stu_video_learn.html?id="+item.id+"\">\n" +
+                    "              <div style=\"position:absolute;left:42%;top:25%;\">\n" +
+                    "                <span class=\"glyphicon glyphicon-play-circle\" aria-hidden=\"true\" style=\"font-size: 50px;opacity:0.8;\"></span>\n" +
+                    "              </div>\n" +
+                    "            </a>\n" +
+                    "            </div>\n" +
+                    "          </div>\n" +
+                    "      </div>")
+          })
+        },
+        error:function(){
+          // alert();
+        }
+      })
+    }
+  </script>
+
+<!-- Metis Menu Js -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script src="assets/js/custom-scripts.js"></script>
+<script type="text/javascript" src="assets/js/head/loader.js"></script>
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+</body>
+</html>
+

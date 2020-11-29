@@ -1,0 +1,561 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>读书会在线学习平台</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <link href="assets/css/select2.min.css" rel="stylesheet" />
+  <link href="assets/css/checkbox3.min.css" rel="stylesheet" >
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="assets/css/login_normalize.css" />
+  <!-- 日历选择 -->
+  <link href="assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css"/>
+  <script src="assets/js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <style>
+    	.dateform{
+    padding-left: 0px;
+    padding-right: 30px;
+    	}
+    </style>
+    
+<div id="wrapper" class="login-page">
+  <div id="login_form" class="form" style="position: absolute;left: 10%;width: 80%">
+    <form class="register-form">
+      <div class="col-sm-5 col-xs-12">
+
+          <div class="form-group">
+            <label for="studentName" class="col-sm-2 control-label">姓名</label>
+            <div class="col-sm-10">
+              <input  class="form-control" id="studentName" placeholder="姓名" style="padding-top: 0px;padding-bottom: 0px;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="studentNumber" class="col-sm-2 control-label">学号</label>
+            <div class="col-sm-10">
+              <input type="name" class="form-control" id="studentNumber" placeholder="学号" style="padding-top: 0px;padding-bottom: 0px;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="studentPassword" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="studentPassword" placeholder="输入至少6位字符" style="padding-top: 0px;padding-bottom: 0px;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">确认密码</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="pwd" onKeyUp="CheckIntensity(this.value)" placeholder="再次输入密码" style="padding-top: 0px;padding-bottom: 0px;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="identityNumber" class="col-sm-2 control-label">身份证号</label>
+            <div class="col-sm-10">
+              <input type="name" class="form-control" id="identityNumber" placeholder="身份证号" style="padding-top: 0px;padding-bottom: 0px;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gender" class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-10" style="text-align: left" >
+               <select name="gender" class="form-control select" id="gender">
+                <option value="0" selected>男</option>
+                <option value="1">女</option>
+              </select>
+            </div>
+          </div>
+       
+          <div class="form-group ">
+            <label for="birth" class="col-sm-2 control-label ">生日</label>
+            <div class="col-sm-10 dateform">
+							<div class="input-group date form_date" data-date="" data-date-format="yyyy MM dd" data-link-field="bidding_deadline" data-link-format="yyyy-mm-dd">
+								<input id="birth" class="form-control" size="16" type="text" value="" readonly>			
+								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+							</div>
+						</div>
+          </div>
+
+          <div class="form-group">
+            <label for="nation" class="col-sm-2 control-label">民族</label>
+            <div class="col-sm-10">
+              <select name="nation" class="form-control select" id="nation" onchange="getChange(this)">
+                <option value="0" selected>汉族</option>
+                <option value="1">壮族</option>
+                <option value="2">满族</option>
+                <option value="3">回族</option>
+                <option value="4">苗族</option>
+                <option value="5">维吾尔族</option>
+                <option value="6">土家族</option>
+                <option value="7">羲族</option>
+                <option value="8">蒙古族</option>
+                <option value="9">藏族</option>
+                <option value="10">布依族</option>
+                <option value="11">侗族</option>
+                <option value="12">瑶族</option>
+                <option value="13">朝鲜族</option>
+                <option value="14">白族</option>
+                <option value="15">哈尼族</option>
+                <option value="16">哈萨克族</option>
+                <option value="17">黎族</option>
+                <option value="18">傣族</option>
+                <option value="19">畲族</option>
+                <option value="20">傈傈族</option>
+                <option value="21">仡佬族</option>
+                <option value="22">东乡族</option>
+                <option value="23">高山族</option>
+                <option value="24">拉祜族</option>
+                <option value="25">水族</option>
+                <option value="26">佤族</option>
+                <option value="27">纳西族</option>
+                <option value="28">羌族</option>
+                <option value="29">土族</option>
+                <option value="30">仫佬族</option>
+                <option value="31">锡伯族</option>
+                <option value="32">柯尔克孜族</option>
+                <option value="33">达斡尔族</option>
+                <option value="34">景颇族</option>
+                <option value="35">毛南族</option>
+                <option value="36">撒拉族</option>
+                <option value="37">塔吉克族</option>
+                <option value="38">阿昌族</option>
+                <option value="39">普米族</option>
+                <option value="40">鄂温克族</option>
+                <option value="41">怒族</option>
+                <option value="42">京族</option>
+                <option value="43">基诺族</option>
+                <option value="44">德昂族</option>
+                <option value="45">保安族</option>
+                <option value="46">俄罗斯族</option>
+                <option value="47">裕固族</option>
+                <option value="48">乌孜别克族</option>
+                <option value="49">门巴族</option>
+                <option value="50">鄂伦春族</option>
+                <option value="51">独龙族</option>
+                <option value="52">塔塔尔族</option>
+                <option value="53">赫哲族</option>
+                <option value="54">珞巴族</option>
+                <option value="55">布朗族</option>             
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nativePlace" class="col-sm-2 control-label">籍贯</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="nativePlace" placeholder="籍贯" style="padding-top: 0px;padding-bottom: 0px;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="collegeId" class="col-sm-2 control-label">学院</label>
+            <div class="col-sm-10">
+              <select name="collegeId" class="form-control select" id="collegeId" onchange="getChange(this)">
+                <option value="0" selected>工商管理学院</option>
+                <option value="1">经济学院</option>
+                <option value="2">财务与会计学院</option>
+                <option value="3">统计与数学学院</option>
+                <option value="4">金融学院</option>
+                <option value="5">法学院</option>
+                <option value="6">旅游与城市管理学院</option>
+                <option value="7">食品与生物工程学院</option>
+                <option value="8">环境科学与工程学院</option>
+                <option value="9">信息与电子工程学院</option>
+                <option value="10">计算机与信息工程学院</option>
+                <option value="11">管理工程与电子商务学院</option>
+                <option value="12">人文与传播学院</option>
+                <option value="13">公共管理学院</option>
+                <option value="14">外国语学院</option>
+                <option value="15">日本语言文化学院</option>
+                <option value="16">艺术设计学院</option>
+                <option value="17">马克思主义学院</option>             
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="className" class="col-sm-2 control-label">班级</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="className" placeholder="班级" style="padding-top: 0px;padding-bottom: 0px;">
+            </div>
+          </div>
+
+          <div class="form-group">
+                <label for="education" class="col-sm-2 control-label">学历</label>
+                <div class="col-sm-10">
+                  <select name="degree" class="form-control select" id="education" onchange="getChange(this)">
+                      <option value="0" selected>本科</option>
+                      <option value="1">硕士</option>
+                      <option value="1">博士</option>
+                  </select>
+                </div>
+            </div>
+
+             <div class="form-group">
+              <label for="resumeUrl" class="col-sm-2 control-label">个人简历</label>
+              <div class="col-sm-10">
+                <input type="file" id="resumeUrl">
+              </div>            
+            </div> 
+            
+             <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">住址</label>
+              <div class="col-sm-10">
+              <input type="text" class="form-control" id="address" placeholder="住址" style="padding-top: 0px;padding-bottom: 0px;">
+            </div>            
+            </div> 
+
+        </div>
+
+
+        <div class="col-sm-7 col-xs-12">
+          
+            <div class="form-group">
+              <label for="degree" class="col-sm-3 control-label">学位</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="degree" placeholder="学位" style="padding-top: 0px;padding-bottom: 0px;">
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label for="applyTime" class="col-sm-3 control-label ">申请入党时间</label>
+              <div class="col-sm-9 dateform">
+								<div class="input-group date form_date" data-date="" data-date-format="yyyy MM dd" data-link-field="bidding_deadline" data-link-format="yyyy-mm-dd">
+									<input id="applyTime" class="form-control" size="16" type="text" value="" readonly>			
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+            </div>
+
+            <div class="form-group ">
+              <label for="activistTime" class="col-sm-3 control-label ">确立为入党积极分子时间</label>
+              <div class="col-sm-9 dateform">
+								<div class="input-group date form_date" data-date="" data-date-format="yyyy MM dd" data-link-field="bidding_deadline" data-link-format="yyyy-mm-dd">
+									<input id="activistTime" class="form-control" size="16" type="text" value="" readonly>			
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+            </div>
+
+            <div class="form-group ">
+              <label for="graduateTime" class="col-sm-3 control-label ">党校结业时间</label>
+              <div class="col-sm-9 dateform">
+								<div class="input-group date form_date" data-date="" data-date-format="yyyy MM dd" data-link-field="bidding_deadline" data-link-format="yyyy-mm-dd">
+									<input id="graduateTime" class="form-control" size="16" type="text" value="" readonly>			
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+            </div>
+
+            <div class="form-group ">
+              <label for="devTime" class="col-sm-3 control-label ">确立为发展对象时间</label>
+              <div class="col-sm-9 dateform">
+								<div class="input-group date form_date" data-date="" data-date-format="yyyy MM dd" data-link-field="bidding_deadline" data-link-format="yyyy-mm-dd">
+									<input id="devTime" class="form-control" size="16" type="text" value="" readonly>			
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+            </div>
+
+            <div class="form-group ">
+              <label for="probationaryTime" class="col-sm-3 control-label ">确立为预备党员时间</label>
+              <div class="col-sm-9 dateform">
+								<div class="input-group date form_date" data-date="" data-date-format="yyyy MM dd" data-link-field="bidding_deadline" data-link-format="yyyy-mm-dd">
+									<input id="probationaryTime" class="form-control" size="16" type="text" value="" readonly>			
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+            </div>
+
+            <div class="form-group ">
+              <label for="partyTime" class="col-sm-3 control-label ">转为正式党员时间</label>
+              <div class="col-sm-9 dateform">
+								<div class="input-group date form_date" data-date="" data-date-format="yyyy MM dd" data-link-field="bidding_deadline" data-link-format="yyyy-mm-dd">
+									<input id="partyTime" class="form-control" size="16" type="text" value="" readonly>			
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+            </div>
+
+            <div class="form-group">
+                  <label for="branchId" class="col-sm-3 control-label">所在党支部</label>
+                  <div class="col-sm-9">
+                    <select name="branchId" class="form-control select" id="branchId" onchange="getChange(this)">
+                        <option value="0" selected>第一党支部</option>
+                        <option value="1">第二党支部</option>
+                    </select>
+                  </div>
+            </div>
+
+            <div class="form-group">
+              <label for="longPhone" class="col-sm-3 control-label">手机长号</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="longPhone" placeholder="手机长号" style="padding-top: 0px;padding-bottom: 0px;">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="shortPhone" class="col-sm-3 control-label">手机短号</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="shortPhone" placeholder="手机短号" style="padding-top: 0px;padding-bottom: 0px;">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="weChat" class="col-sm-3 control-label">微信号</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="weChat" placeholder="微信号" style="padding-top: 0px;padding-bottom: 0px;">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="col-sm-3 control-label">电子邮箱</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="email" placeholder="电子邮箱" style="padding-top: 0px;padding-bottom: 0px;">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">培养人一</label>
+                <div class="col-sm-9">
+                    <select  name="branchId" class="form-control select">
+                        <option value="">张三</option>
+                        <option value="">李四</option>
+                        <option value="">王五</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">培养人二</label>
+	              <div class="col-sm-9">
+                      <select  name="branchId" class="form-control select">
+                          <option value="">张三</option>
+                          <option value="">李四</option>
+                          <option value="">王五</option>
+                      </select>
+	              </div>
+<!--	             	<div class="col-sm-5">-->
+<!--	                <label type="text" class="form-control" id="secondTeacherPhone"></label>-->
+<!--	              </div>     -->
+            </div>
+
+        </div>
+        
+        <button class="btn btn-default" onclick="login()">注册</button>
+        </form>
+
+  </div>
+</div>
+	<script type="text/javascript" src="assets/js/jquery.js" ></script>
+  <script src="assets/js/bootstrap-datetimepicker.js" ></script>
+  <script src="assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
+  <script src="assets/js/custom-scripts.js"></script>
+  <script type="text/javascript">
+  	//日历格式设置
+  	$('.form_date').datetimepicker({
+                language:  'zh-CN',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0
+           })
+  	//获取字段信息
+  	function login(){
+		var developmentTime = $("#developmentTime").val();
+			if (developmentTime == "") {
+				sweetAlert("提示", "确定为发展对象时间未填写");
+				return false;
+			}
+			
+		var studentNumber = $("#studentNumber").val();
+			if (studentNumber == "") {
+				sweetAlert("提示", "学号未填写");
+				return false;
+			}
+			
+		var studentPassword = $("#studentPassword").val();
+			if (studentPassword == "") {
+				sweetAlert("提示", "密码未填写");
+				return false;
+			}
+			
+		var identityNumber = $("#identityNumber").val();
+			if (identityNumber == "") {
+				sweetAlert("提示", "省份证号未填写");
+				return false;
+			}
+			
+		var birth = $("#birth").val();
+			if (birth == "") {
+				sweetAlert("提示", "出生日期未填写");
+				return false;
+			}
+			
+		var nativePlace = $("#nativePlace").val();
+			if (nativePlace == "") {
+				sweetAlert("提示", "籍贯未填写");
+				return false;
+			}
+			
+		var className = $("#className").val();
+			if (className == "") {
+				sweetAlert("提示", "班级未填写");
+				return false;
+			}
+			
+		var applyTime = $("#applyTime").val();
+			if (applyTime == "") {
+				sweetAlert("提示", "申请入党时间未填写");
+				return false;
+			}
+			
+		var degree = $("#degree").val();
+			if (degree == "") {
+				sweetAlert("提示", "学位未填写");
+				return false;
+			}
+			
+		var activistTime = $("#activistTime").val();
+			if (activistTime == "") {
+				sweetAlert("提示", "确定为入党积极分子时间未填写");
+				return false;
+			}
+			
+		var graduateTime = $("#graduateTime").val();
+			if (graduateTime == "") {
+				sweetAlert("提示", "党校结业时间未填写");
+				return false;
+			}
+			
+		var studentName = $("#studentName").val();
+			if (studentName == "") {
+				sweetAlert("提示", "姓名未填写");
+				return false;
+			}
+			
+		var probationaryTime = $("#probationaryTime").val();
+			if (probationaryTime == "") {
+				sweetAlert("提示", "确定为预备党员时间未填写");
+				return false;
+			}
+			
+		var partyTime = $("#partyTime").val();
+			if (partyTime == "") {
+				sweetAlert("提示", "确定为正式党员时间未填写");
+				return false;
+			}
+			
+		var firstTeahcerName = $("#firstTeahcerName").val();
+			if (firstTeahcerName == "") {
+				sweetAlert("提示", "第一培养人姓名未填写");
+				return false;
+			}
+			
+		var firstTeacherPhone = $("#firstTeacherPhone").val();
+			if (firstTeacherPhone == "") {
+				sweetAlert("提示", "第一培养人手机号未填写");
+				return false;
+			}
+			
+		var secondTeacherName = $("#secondTeacherName").val();
+			if (secondTeacherName == "") {
+				sweetAlert("提示", "第二培养人姓名未填写");
+				return false;
+			}
+			
+		var secondTeacherPhone = $("#secondTeacherPhone").val();
+			if (secondTeacherPhone == "") {
+				sweetAlert("提示", "第二培养人手机号未填写");
+				return false;
+			}
+			
+		var address = $("#address").val();
+			if (address == "") {
+				sweetAlert("提示", "家庭住址未填写");
+				return false;
+			}
+			
+		var longPhone = $("#longPhone").val();
+			if (longPhone == "") {
+				sweetAlert("提示", "手机长号未填写");
+				return false;
+			}
+			
+		var email = $("#email").val();
+			if (email == "") {
+				sweetAlert("提示", "邮箱未填写");
+				return false;
+			}
+			
+			var weChat = $("#weChat").val();
+			
+			var shortPhone = $("#shortPhone").val();
+			
+			var gender=$("#gender option:selected").val();
+			
+			var nation=$("#nation option:selected").val();
+			
+			var collegeId=$("#collegeId option:selected").val();
+			
+			var education=$("#education option:selected").val();
+			
+			var msg={
+				education:education,
+				collegeId:collegeId,
+				nation:nation,
+				gender:gender,
+				shortPhone:shortPhone,
+				weChat:weChat,
+				email:email,
+				longPhone:longPhone,
+				address:address,
+				secondTeacherPhone:secondTeacherPhone,
+				secondTeacherName:secondTeacherName,
+				firstTeahcerName:firstTeahcerName,
+				firstTeacherPhone:firstTeacherPhone,
+				partyTime:partyTime,
+				probationaryTime:probationaryTime,
+				studentName:studentName,
+				developmentTime:developmentTime,
+				studentNumber:studentNumber,
+				studentPassword:studentPassword,
+				identityNumber:identityNumber,
+				education:education,
+				birth:birth,
+				nativePlace:nativePlace,
+				className:className,
+				applyTime:applyTime,
+				activistTime:activistTime,
+				degree:degree
+			}
+			$.ajax({
+        type : "POST",
+        url : host+"/api/students",
+        data: message,
+        success : function(data) {
+       // alert(JSON.stringify(data))
+          if (data.code == "200") {
+            window.location.href="login.html";
+            return true
+          }
+        },
+        error :function () {
+          sweetAlert("警告", "服务器连接出错！");}
+      });
+  	}
+  	
+  </script>
+</body>
+</html>

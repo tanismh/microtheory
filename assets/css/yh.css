@@ -1,0 +1,10 @@
+#page-wrapper {
+    margin: 0 0 0 290px;
+    min-height:900px;
+}
+#page-inner{
+    min-height:800px;
+}
+.row{
+    min-height:735px;
+}

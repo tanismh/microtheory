@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="webthemez" name="author" />
+  <title>视频管理</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script> 
+  <script src="assets/js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
+  <!-- TABLE STYLES-->
+  <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+  <link href="assets/css/cropper.min.css" rel="stylesheet">
+  <link href="assets/css/sitelogo.css" rel="stylesheet">
+  <script src="assets/js/cropper.min.js"></script>
+  <script src="assets/js/sitelogo.js"></script>
+  <script> 
+    $(document).ready(function(){
+      //收起侧边栏
+      $("#sideNav").click(function(){
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});         
+        }
+        else{
+          $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+
+    });
+  </script> 
+  <style>
+    .form-group{
+          height: 30px;
+        }
+      .changeList{
+          margin: 10px auto;
+      }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+      <ol class="breadcrumb">
+       <!--  <li><a href="#">个人中心</a></li> -->
+       <li><a href="admin_video.html">视频管理</a></li>
+       <li class="active">上传视频</li>
+      </ol>
+      <div id="page-inner">
+      <div class="row">
+          <div class="col-xs-7 col-md-7">
+<!--              <div class="form-group">-->
+<!--                  <label for="upload" class="col-sm-2 control-label">上传视频</label>-->
+<!--                  <div class="col-sm-10">-->
+<!--                    <input type="file" id="upload" onchange=changeFile(this)>-->
+<!--                  </div>-->
+<!--                </div>-->
+              <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label">课程名称</label>
+                  <div class="col-sm-10">
+                      <input type="text" class="form-control" id="name" value="">
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="time" class="col-sm-2 control-label">讲师</label>
+                  <div class="col-sm-10">
+                      <input type="text" class="form-control" id="time" value="">
+                  </div>
+              </div>
+
+
+              <div class="form-group">
+                  <label for="upload" class="col-sm-2 control-label">封面</label>
+                  <div class="col-sm-10">
+                      <input type="file" id="uploadPoto" onchange=photoChange(this)>
+                  </div>
+              </div>
+
+
+           
+            <div class="form-group">
+              <label for="typeid" class="col-sm-2 control-label">视频类别</label>
+              <div class="col-sm-10">
+                  <div class="dropdown">
+                      <button id="typeid" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
+                          思政
+                          <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li class="myList">
+                              <a href="#">思政</a>
+                          </li>
+                          <li class="myList">
+                              <a href="#">时政</a>
+                          </li>
+                          <li class="myList"><a href="#">时事</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li  data-toggle="modal" data-target="#myModal"><a href="#">编辑类别</a></li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+            <label for="mediaIntroduce" class="col-sm-2 control-label">视频简介</label>
+            <div class="col-sm-10">
+            <textarea class="form-control" id="mediaIntroduce" rows="5"> </textarea>
+            </div>
+          <div class="text-right">
+              <button type="button" class="btn btn-primary sure_upload" style="position: relative; float: right;top:10px;right: 15px;">确认保存</button>
+              <button type="button" class="btn btn-primary sure_upload" style="position: relative; float: right;top:10px;right: 15px;margin-right: 10px" onclick="addC(this)">添加视频</button>
+
+          </div>
+          </div>
+      </div><!-- /. ROW  -->
+      <div style="height: 20px;width: 100%"></div>
+
+
+
+
+      <video style="display:none;" controls="controls" id="aa" oncanplaythrough="myFunction(this)">
+	   	
+        </video>
+        <span id="getDuration"></span>
+      </div><!--/.pager-inner-->
+      
+
+<!-- <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div> -->
+    <div id="footer"></div>
+    </div><!--/.page-wrapper-->
+
+</div><!--/.wrapper-->
+  <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">管理类别</h4>
+              </div>
+              <div class="modal-body " style="width: 100%">
+                  <ul id="changeUl">
+                      <li style="list-style: none" class="changeList" id="changeList01">
+                          <input type="text" value="思政">
+                          <button type="button" changeList="changeList01" class="btn btn-danger deleteEle" onclick="delteElement(this)">删除</button>
+                      </li>
+                      <li style="list-style: none" class="changeList" id="changeList02">
+                          <input type="text" value="思政">
+                          <button type="button" changeList="changeList02" class="btn btn-danger deleteEle" onclick="delteElement(this)">删除</button>
+                      </li>
+                      <li style="list-style: none" class="changeList" id="changeList03">
+                          <input type="text" value="思政">
+                          <button type="button"changeList="changeList03"  class="btn btn-danger deleteEle" onclick="delteElement(this)">删除</button>
+                      </li>
+                      <li style="list-style: none" class="changeList" id="changeList04">
+                          <input type="text" value="思政">
+                          <button type="button"changeList="changeList04"  class="btn btn-danger deleteEle" onclick="delteElement(this)">删除</button>
+                      </li>
+
+                  </ul>
+                  <ul style="list-style: none;">
+                      <li>
+                          <button type="button" class="btn btn-success" onclick="addClass(this)">
+                              <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true" style="color: white"></span>
+                              添加新类别
+                          </button>
+                      </li>
+                  </ul>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  <button type="button" class="btn btn-primary">确认修改</button>
+              </div>
+          </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+    
+<script src="assets/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="assets/js/head/loader_admin.js"></script>
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+    var chooseValue = "思政" ;
+  $('#save').click(function(){
+   window.location.href="admin_user.html";
+  });
+  
+  //获取视频分类
+  var message={
+    pageNumber:1,
+    pageSize:100
+  }
+  $.ajax({
+     type : "get",
+     url : host+"/api/categories",
+    //  contentType : "application/json",
+    data:message,
+     success : function(data) {
+       var opts='';
+       $.each(data.data, function(i, item){
+         opts+=' <option value="'+item.categoryId+'" selected>'+item.categoryName+'</option>'
+       })
+      $("#typeid").html(opts)
+     }
+  })
+  //上传视频
+  $(".sure_upload").click(function(){
+    //console.log(valid());
+   // alert($("#name").val().match(/^.{20}$/))
+   valid()
+    var message={
+        mediaType:1,
+        mediaName:$("#name").val(),
+        mediaIntroduce:$("#mediaIntroduce").html(),
+        mediaUrl:'',
+        mediaLength:$("#time").val(),
+        categoryId:$("#typeid").val()
+    }
+    // var form = $("#upload")[0].files[0];
+      var form ;
+    var formData = new FormData();
+    formData.append('file', form);
+    if(valid()){
+      $.ajax({
+        type : "post",
+        url : host+"/api/files",
+        processData: false ,
+        contentType : false,
+        data : formData,
+        success : function(data) {
+            message.mediaUrl=data.data;
+            $.ajax({
+              type : "post",
+              url : host+"/api/media",
+              contentType : "application/json",
+              data : JSON.stringify(message),
+              success : function(data) {
+                if(data.code==200){
+                  swal("上传成功！")
+                  location.href="./admin_video.html"
+                }else{
+                  swal("上传失败！", "未能成功上传该视频。") ;
+                }
+              }
+            })     
+        }
+      })
+    }
+  })
+  //表单验证
+  var mediaLength=0;
+  var valid = function(){
+      var valid=true;
+      var mediaName=$("#name").val();
+      var mediaIntroduce=$("#mediaIntroduce").html();
+      var mediaLength=$("#time").val();
+      if(mediaName==""||mediaIntroduce==""){
+        valid=false;
+      }else if(mediaName.match(/^.{20}$/)==null){
+        valid=false;
+      }else if(mediaName.match(/\d{1,5}/)==null){
+        valid=false;
+      }else if(mediaLength>=300*60){
+        valid=false;
+      }
+     
+      return valid;
+  }
+
+  //获取视频相关信息
+  function myFunction(ele) {
+			// var hour = parseInt((ele.duration)/3600);
+			// var minute = (ele.duration%3600)/60;
+			mediaLength = Math.ceil(ele.duration%60);
+			//console.log(Math.floor(ele.duration));
+			//document.write("这段视频的时长为："+hour+"小时，"+minute+"分，"+second+"秒");
+		  //	document.getElementById("getDuration").innerHTML="这段视频的时长为："+hour+"小时，"+minute+"分，"+second+"秒";
+    }  
+    function changeFile(ele){  
+		    var video = ele.files[0];  
+		    var url = URL.createObjectURL(video);  
+		    console.log(url);  
+		    document.getElementById("aa").src = url;
+        var audioElement = new Audio(url);
+        var duration;
+        audioElement.addEventListener("loadedmetadata", function (_event) {
+            this.duration = audioElement.duration ;
+        });
+    }
+    function photoChange(ele) {
+        var video = ele.files[0];
+        var url = URL.createObjectURL(video);
+        console.log(url);
+        document.getElementById("aa").src = url;
+    }
+  //获取文件格式
+  function checkTv(){
+    var tv_id =document.getElementById('movie_tv').value;//根据id得到值
+    var index= tv_id.indexOf("."); //得到"."在第几位
+    tv_id=tv_id.substring(index); //截断"."之前的，得到后缀
+        if(tv_id!=".mp4"&&tv_id!=".rmvb"&&tv_id!=".avi"&&tv_id!=".ts"){ //根据后缀，判断是否符合视频格式
+            alert("不是指定视频格式,重新选择"); 
+          document.getElementById('movie_tv').value="";   // 不符合，就清除，重新选择
+        }
+  }
+
+  //点击修改显示框的值
+    $(".myList").click(function () {
+        chooseValue = ($(this).context.textContent).trim();
+        document.getElementById("typeid").innerHTML = chooseValue + "<span class=\"caret\"></span>"
+    })
+
+    //点击删除类别
+    var flag = 0
+    function delteElement(event) {
+        console.log(event)
+        if (flag %2 == 0 ){
+            alert("该类别下已有视频，无法删除");
+        }else{
+            var message = confirm("确认删除？")
+            if (message == true){
+                document.getElementById(event.getAttribute("changeList")).remove()
+            }
+        }
+        flag = flag+1
+    }
+    //增加新类别
+    function addClass(event) {
+      var length = document.getElementById("changeUl").childNodes.length
+        length++
+        $("#changeUl").append("<li style=\"list-style: none\" class=\"changeList\" id=\"changeList0"+length+"\">\n" +
+            "                          <input type=\"text\">\n" +
+            "                          <button type=\"button\"changeList=\"changeList0"+length+"\"  class=\"btn btn-danger deleteEle\" onclick=\"delteElement(this)\">删除</button>\n" +
+            "                      </li>")
+    }
+    function uploadClass(thisParameter) {
+        thisParameter.parentElement.childNodes[1].setAttribute('style', 'display: unset;color: cornflowerblue;');
+    }
+    function deleteClass(thisParameter) {
+
+        console.log(thisParameter.parentElement.parentElement)
+        var son = thisParameter.parentElement.parentElement ;
+        var parent = thisParameter.parentElement.parentElement.parentElement ;
+        parent.removeChild(son)
+    }
+    function  addC(thisParameter) {
+      var Parent = thisParameter.parentElement.parentElement.parentElement.parentElement
+    var son = document.createElement("div")
+      var ele = "<div class=\"row\" style=\"padding-top: 10px\">\n" +
+          "          <div class=\"col-xs-7 col-md-7\"  style=\"border-top: #4D4D4D 1px solid\">\n" +
+          "              <hr>\n" +
+          "              <div class=\"form-group\">\n" +
+          "                  <label for=\"time\" class=\"col-sm-2 control-label\">章节名称</label>\n" +
+          "                  <div class=\"col-sm-10\">\n" +
+          "                      <input type=\"text\" class=\"form-control\"  value=\"\">\n" +
+          "                  </div>\n" +
+          "              </div>\n" +
+          "\n" +
+          "              <div class=\"form-group\">\n" +
+          "                  <label class=\"col-sm-2 control-label\">上传视频  </label>\n" +
+          "                  <div class=\"col-sm-10\">\n" +
+          "                      <input type=\"file\"  onchange=photoChange(this)>\n" +
+          "                  </div>\n" +
+          "              </div>\n" +
+          "              <div class=\"text-right\">\n" +
+          "                  <span class=\"successUpload\" style=\"color: cornflowerblue;display: none\" >上传成功</span>\n" +
+          "                  <button  type=\"button\" class=\"btn btn-success text-right\" onclick=\"uploadClass(this)\">\n" +
+          "                      <span class=\"glyphicon glyphicon-upload\" aria-hidden=\"true\"></span>上传</button>\n" +
+          "                  <button  type=\"button\" class=\"btn btn-danger text-right\" onclick=\"deleteClass(this)\">\n" +
+          "                      <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>删除</button>\n" +
+          "              </div>\n" +
+          "\n" +
+          "          </div>\n" +
+          "      </div>";
+
+        son.innerHTML=ele;
+        Parent.appendChild(son)
+
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="webthemez" name="author" />
+  <title>视频管理</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script> 
+  <script src="assets/js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
+  <!-- TABLE STYLES-->
+  <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+  <link href="assets/css/cropper.min.css" rel="stylesheet">
+  <link href="assets/css/sitelogo.css" rel="stylesheet">
+  <script src="assets/js/cropper.min.js"></script>
+  <script src="assets/js/sitelogo.js"></script>
+  <script> 
+    $(document).ready(function(){
+      //收起侧边栏
+      $("#sideNav").click(function(){
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});         
+        }
+        else{
+          $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+
+    });
+  </script> 
+  <style>
+    .form-group{
+          height: 30px;
+        }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+      <ol class="breadcrumb">
+       <!--  <li><a href="#">个人中心</a></li> -->
+       <li><a href="admin_video.html">视频管理</a></li>
+       <li class="active">视频信息编辑</li>
+      </ol>
+      <div id="page-inner">
+      <div class="row">
+         
+          <div class="col-xs-7 col-md-7">
+              <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label">视频名称</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">视频时长</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="time" value="" placeholder="分钟数">
+                    </div>
+                  </div>
+                <div class="form-group">
+                  <label for="typeid" class="col-sm-2 control-label">视频类别</label>
+                  <div class="col-sm-10">
+                    <select name="typeid" class="form-control select" id="typeid" >
+                    <option value="0" selected>思政</option>
+                    <option value="1">其他</option>
+                    </select>
+                  </div>
+                </div>
+                <label for="mediaIntroduce" class="col-sm-2 control-label">视频简介</label>
+                <div class="col-sm-10">
+                <textarea class="form-control" id="mediaIntroduce" rows="5"> </textarea>
+                </div>
+            <button type="button" class="btn btn-primary save" style="position: relative; float: right;top:10px;right: 15px;">保存</button>
+            </div>
+      </div><!-- /. ROW  -->
+      </div><!--/.pager-inner-->
+      
+
+<!-- <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div> -->
+    <div id="footer"></div>
+    </div><!--/.page-wrapper-->
+
+</div><!--/.wrapper-->
+
+     
+<script src="assets/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="assets/js/head/loader_admin.js"></script>
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+
+  $('#save').click(function(){
+   window.location.href="admin_user.html";
+
+  });
+//获取id
+   var id=location.href.split('?')[1].split("=")[1]
+  //获取原始信息
+  function getV(){
+    //var id=location.href.split('?')[1].split("=")[1]
+    $.ajax({
+     type : "get",
+     url : host+"/api/media/"+id,
+     contentType : "application/json",
+     success : function(res) {
+     // console.log(data);
+      var data=res.data;
+      $("#name").val(data.mediaName)
+      $("#time").val(data.mediaLength)
+      $("#mediaIntroduce").html(data.mediaIntroduce)
+      $("#typeid").val(data.mediaType)
+    }
+  })
+  }
+//获取视频分类
+  var message={
+      pageNumber:1,
+      pageSize:100
+    }
+  $.ajax({
+     type : "get",
+     url : host+"/api/categories",
+    //  contentType : "application/json",
+    data:message,
+     success : function(data) {
+       var opts='';
+       $.each(data.data, function(i, item){
+         opts+=' <option value="'+item.categoryId+'" selected>'+item.categoryName+'</option>'
+       })
+      $("#typeid").html(opts)
+      getV();
+     }
+  })
+
+
+  //修改视频
+  $(".save").click(function(){
+    // swal("上传失败！", "未能成功上传该视频。") ;
+
+  var message={
+      mediaId:id,
+      mediaType:1,
+      mediaName:$("#name").val(),
+      mediaIntroduce:$("#mediaIntroduce").html(),
+     //mediaUrl:'',
+      mediaLength:$("#time").val(),
+      categoryId:$("#typeid").val()
+  }
+        $.ajax({
+          type : "patch",
+          url : host+"/api/media",
+          contentType : "application/json",
+          data : JSON.stringify(message),
+          success : function(data) {
+            if(data.code==200){
+              swal("修改成功！")
+              setTimeout(function(){ location.href="./admin_video.html"},500)
+            }else{
+              swal("修改失败！", "未能成功修改该视频。") ;
+            }
+          }
+        })     
+})
+
+</script>
+
+</body>
+</html>

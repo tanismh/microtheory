@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="" name="description" />
+  <meta content="webthemez" name="author" />
+  <title>学生档案</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+<!--  <link href="assets/css/custom-styles.css" rel="stylesheet" />-->
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <link href="assets/css/video-js.css" rel="stylesheet"> 
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/popup.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css"/>
+  <script src="assets/js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+$(function () {
+
+  /**
+	  ifDrag: 是否拖拽
+	  dragLimit: 拖拽限制范围
+   */
+  $('#popup').popup({ifDrag: false, dragLimit: true});
+  
+});
+</script>
+<style>
+* { 
+	margin: 0; 
+	padding: 0; 
+}
+body {
+	 font-family: "Microsoft Yahei"; 
+	 font-size: 16px; 
+	 background-color: transparent;
+}
+
+#mask_shadow {
+  display: none;
+  opacity: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+}
+#popup {
+  display: none;
+  opacity: 0; 
+  position: absolute;
+  z-index: 2;
+  /*width: 400px;*/
+  /*height: 300px;*/
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  left: 0 !important;
+  top: 0 !important;
+}
+#popup .title {
+  position: relative;
+  width: 100%;
+  height: 55px;
+  background-color: whitesmoke;
+  cursor: move;
+}
+#popup .title p {
+  padding-left: 14px;
+  line-height: 55px;
+  color: black;
+}
+#popup .title span {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  color: #000;
+  opacity: .2;
+  font-size: 21px;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #333;
+}
+#popup .title span:hover {
+  opacity: .8;
+}
+#popup .cont { 
+	width: 100%; 
+	background-color: #EDEDED;    
+}
+#btn1 {
+  margin: 5px;
+}
+.control-label{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+</style>
+</head>
+
+<body>
+      <div class="col-sm-6 col-xs-12">
+
+          <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">姓名</label>
+            <div class="col-sm-10" >
+              <label class="form-control" id="name">李嘉欣</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="number" class="col-sm-2 control-label">学号</label>
+            <div class="col-sm-10">
+              <label type="text" class="form-control" id="number">1511040109</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">证件照</label>
+            <div class="col-sm-10">
+                <button class="btn btn-default" id="btn1" style="margin: 0px;">点击查看</button>
+              <div id="popup">
+                  <div class="title">
+                      <p data-title="证件照"></p>
+                      <span>x</span>
+                  </div>
+                  <div class="cont">
+                      <img src="assets/img/picture.jpg"/>
+                  </div>
+              </div>
+                  <div id="mask_shadow"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="personId" class="col-sm-2 control-label">身份证号</label>
+            <div class="col-sm-10">
+              <label type="text" class="form-control" id="personId">452230199707114566</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sex" class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-10">
+              <label type="text" class="form-control" id="sex">男</label>
+            </div>
+          </div>
+       
+          <div class="form-group ">
+            <label for="birthday" class="col-sm-2 control-label ">生日</label>
+            <div class="col-sm-10" >
+              <label type="text" class="form-control" id="birthday">1997-07-11</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nation" class="col-sm-2 control-label">民族</label>
+            <div class="col-sm-10">
+             <label type="text" class="form-control" id="nation">汉族</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="origin" class="col-sm-2 control-label">籍贯</label>
+            <div class="col-sm-10">
+              <label type="text" class="form-control" id="origin">浙江杭州</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="institute" class="col-sm-2 control-label">学院</label>
+            <div class="col-sm-10">
+              <label type="text" class="form-control" id="institute">信息学院</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="class" class="col-sm-2 control-label">班级</label>
+            <div class="col-sm-10">
+              <label type="text" class="form-control" id="class">计科1401</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+                <label for="education" class="col-sm-2 control-label">学历</label>
+                <div class="col-sm-10">
+              <label type="text" class="form-control" id="education">本科</label>
+            </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="col-sm-2 control-label">电子邮箱</label>
+             <div class="col-sm-10">
+                <label type="text" class="form-control" id="email">123456789@qq.com</label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-2 control-label">培养人1</label>
+             <div class="col-sm-4">
+                <label type="text" class="form-control" id="teacher1name">张三三</label>
+              </div>
+             <div class="col-sm-6">
+                <label type="text" class="form-control" id="teacher1phone">13967189654</label>
+              </div>            
+            </div>   
+ 
+            <div class="form-group">
+              <label class="col-sm-2 control-label">培养人2</label>
+             <div class="col-sm-4">
+                <label type="text" class="form-control" id="teacher2name">李小红</label>
+              </div>
+             <div class="col-sm-6">
+                <label type="text" class="form-control" id="teacher2phone">15937189654</label>
+              </div>            
+            </div> 
+
+            <div class="form-group">
+              <label for="username" class="col-sm-2 control-label">个人简历</label>
+              <div class="col-sm-10">
+                <button class="btn btn-default" id="download" style="margin-right: 5px;">下载到本地</button>
+              </div>            
+            </div> 
+            
+        </div>
+
+<!--右边列-->
+        <div class="col-sm-6 col-xs-12">
+          
+            <div class="form-group">
+              <label for="degree" class="col-sm-4 control-label">学位</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="degree">高中</label>
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label for="applyTime" class="col-sm-4 control-label">申请入党时间</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="applyTime">2015-11-01</label>
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label for="establishTime" class="col-sm-4 control-label">积极分子确立时间</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="establishTime">2016-03-20</label>
+              </div>
+            </div>
+
+
+            <div class="form-group ">
+              <label for="finishSchoolTime" class="col-sm-4 control-label">党校结业时间</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="finishSchoolTime">2017-09-29</label>
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label for="developTime" class="col-sm-4 control-label">发展对象确立时间</label>
+             <div class="col-sm-8">
+                <label type="text" class="form-control" id="developTime">2016-01-01</label>
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label for="preMemberTime" class="col-sm-4 control-label">预备党员确立时间</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="preMemberTime">2016-01-01</label>
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label for="MemberTime" class="col-sm-4 control-label">转正时间</label>
+             <div class="col-sm-8">
+                <label type="text" class="form-control" id="MemberTime">2016-01-01</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+                  <label for="branch" class="col-sm-4 control-label">所在党支部</label>
+                  <div class="col-sm-8">
+                <label type="text" class="form-control" id="branch">第一党支部</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="col-sm-4 control-label">手机长号</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="longPhone">1234567894</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="col-sm-4 control-label">手机短号</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="shortPhone">1234567</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="col-sm-4 control-label">微信号</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="wechat">1234567894</label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="username" class="col-sm-4 control-label">QQ号</label>
+              <div class="col-sm-8">
+                <label type="text" class="form-control" id="qq">1234567894</label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="username" class="col-sm-4 control-label" >本季度学习情况</label>
+              <div class="col-sm-8" style="margin-bottom: 12px;">
+                <span style="color: green; font-weight: 600;" id="finished">已学完本季度课程</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="col-sm-4 control-label">读书心得</label>
+              <div class="col-sm-8">
+                <button class="btn btn-primary" onclick="window.location.href='stu_word_view.html'">查 看</button>
+              </div>
+            </div>
+
+        </div>
+
+      </div>
+
+<script type="text/javascript">
+  var host="http://10.21.30.218:8080";
+//	获取学生个人信息
+	$(document).ready(function() {
+      var id = window.paramFromParent;
+    $.ajax({
+      type : "GET",
+      url : host+"/api/students/info",
+      data:{studentId:id},
+      contentType : "application/json",
+      success : function(data) {
+        console.log(data);
+        if (data.code == "200") {
+          showData(data);
+        }
+      },
+      error :function () {
+        sweetAlert("警告", "服务器连接出错！");
+      }
+    });
+  });
+  
+	function showData(data){
+//		alert('showData')
+//        alert(data.data.studentName);
+      $("#name").html(data.data.studentName);
+      $("#number").html(data.data.studentNumber);
+      $("#personId").html(data.data.identityNumber);
+      $("#sex").html(data.data.gender);
+      $("#birthday").html(data.data.birth);
+      $("#nation").html(data.data.nation);
+      $("#origin").html(data.data.nativePlace);
+      $("#institute").html(data.data.collegeName);
+      $("#class").html(data.data.className);
+      $("#education").html(data.data.education);
+      $("#teacher1name").html(data.data.firstTeacherName);
+      $("#teacher1phone").html(data.data.firstTeacherPhone);
+      $("#teacher2name").html(data.data.secondTeacherName);
+      $("#teacher2phone").html(data.data.secondTeacherPhone);
+      $("#degree").html(data.data.degree);
+
+      //转化时间格式
+      function getDate(str){
+        var oDate = new Date(str),
+          oYear = oDate.getFullYear(),
+          oMonth = oDate.getMonth()+1,
+          oDay = oDate.getDate(),
+          oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay);//拼接时间
+        return oTime;
+      };
+
+      //时间补0
+      function getzf(num){
+        if(parseInt(num) < 10){
+          num = '0'+num;
+        }
+        return num;
+      }
+
+      $("#applyTime").html(getDate(data.data.applyTime));
+      $("#establishTime").html(getDate(data.data.activistTime));
+      $("#finishSchoolTime").html(getDate(data.data.graduateTime));
+      $("#developTime").html(getDate(data.data.developmentTime));
+      $("#preMemberTime").html(getDate(data.data.probationaryTime));
+      $("#MemberTime").html(getDate(data.data.partyTime));
+      $("#branch").html(data.data.branchName);
+      $("#longPhone").html(data.data.longPhone);
+      $("#shortPhone").html(data.data.shortPhone);
+      $("#wechat").html(data.data.weChat);
+      $("#qq").html(data.data.qq);
+
+      var finished=0;
+      if (data.data.studyFlag==1){
+        finished="已完成本季度学习"
+      }else {
+        finished="未完成本季度学习"
+      }
+      $("#finished").html(finished);
+
+      //照片url还没写
+
+
+	}
+
+</script>
+</body>
+</html>

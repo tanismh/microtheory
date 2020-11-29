@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>个人档案</title>
+
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <link href="assets/css/video-js.css" rel="stylesheet"> 
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script> 
+    $(document).ready(function(){
+      $("#center").removeClass("active-menu");
+      $("#file").addClass("active-menu");
+
+        $("#sideNav").click(function(){
+
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});
+          
+        }
+        else{
+            $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+
+    });
+
+    function openmydoc(path)
+    { 
+    var doc=new ActiveXObject("Word.Application"); 
+    doc.visible=true; 
+    doc.Documents.Open(path); 
+    }  
+
+
+  </script> 
+</head>
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+
+        <ol class="breadcrumb">
+          <li><a href="./stu_center.html">个人中心</a></li>
+          <li class="active">我的档案</li>
+          <div class="navbar-right" style="position:relative;bottom:8px;right:10px;">
+            <button class="btn btn-primary" type="submit" onclick="window.location.href='stu_file_update.html'">修改档案</button>
+            <button class="btn btn-primary" type="submit">导出资料包</button>
+          </div>
+        </ol>
+
+    <div id="page-inner">
+    <form class="register-form">
+				<iframe src="stu_info.html" width="100%"   height="700" scrolling="auto" frameborder="0"></iframe>
+    </form>
+        
+
+
+      </div><!--/.pager-inner-->
+
+      <div id="footer"></div>
+
+    </div><!--/.page-wrapper-->
+
+  </div><!--/.wrapper-->
+
+
+  <!-- Metis Menu Js -->
+  <script src="assets/js/jquery.metisMenu.js"></script>
+  <!-- Custom Js -->
+  <script src="assets/js/custom-scripts.js"></script>
+
+</body>
+</html>
+<script type="text/javascript" src="assets/js/head/loader.js"></script>

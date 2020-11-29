@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://api.asilu.com/cdn/jquery.js,jquery.backstretch.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+<form action="http://localhost:8021/test/login" method="post">
+    <table border="1px black dashed">
+        <tr>
+            <td>hhhh</td>
+            <td>dddd</td>
+        </tr>
+        <tr style="height: 100px">
+            <td>www</td>
+            <td>oooo</td>
+        </tr>
+    </table>
+</form>
+<script>
+    function send() {
+        // console.log(document.getElementById("tel").value)
+        var message = {
+            tel:document.getElementById("tel").value
+        }
+        $.ajax({
+            type: "post",
+            url: "http://192.168.43.221:8080/getTel",
+            data: message,
+            success: function (data) {
+
+            }
+        })
+        return false
+    }
+</script>
+</body>
+</html>

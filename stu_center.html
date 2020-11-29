@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人中心</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+
+      <div class="header" style="margin:0 auto;text-align: center;position: relative;top: 20px;"> 
+        <a href="#"><img src="assets/img/head.jpg" alt="..." style="width: 150px;height: 150px;" class="img-circle user-image"></a>
+        <h1 class="page-header record" style="margin:0 auto;text-align: center;padding-top: 10px;padding-bottom: 10px;">
+          欢迎您，李嘉欣！</Br><small>您已学习60分钟，本季度还需学习90分钟。</small>
+        </h1>
+      </div>
+
+      <div id="page-inner">
+        <div class="row list">
+
+        </div><!--/.row-->
+
+      </div><!--/.pager-inner-->
+
+      <div id="footer"></div>
+
+    </div><!--/.page-wrapper-->
+
+  </div><!--/.wrapper-->
+
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <!-- Metis Menu Js -->
+  <script src="assets/js/jquery.metisMenu.js"></script>
+  <!-- Custom Js -->
+  <script src="assets/js/custom-scripts.js"></script>
+  <script type="text/javascript" src="assets/js/head/loader.js"></script>
+
+  <script>
+        $("#sideNav").click(function(){
+          if($(this).hasClass('closed')){
+            $('.navbar-side').animate({left: '0px'});
+            $(this).removeClass('closed');
+            $('#page-wrapper').animate({'margin-left' : '290px'});
+            
+          }
+          else{
+              $(this).addClass('closed');
+            $('.navbar-side').animate({left: '-290px'});
+            $('#page-wrapper').animate({'margin-left' : '0px'}); 
+          }
+        });
+
+        data={
+          name:'joy',
+          time:12,
+          need:14
+        }
+        
+        // $.ajax({
+	      //   type: "get",
+	      //   //contentType: "application/json",
+	      //   url: host+"/api/students/center",
+	      //   data: JSON.stringify(event),
+	      //   success: function(data) {
+        //     $(".record").html(' 欢迎您，'+data.name+'！</Br><small>您已学习'+data.time+'分钟，本季度还需学习'+data.need+'分钟。</small>')
+	      //   }
+        // })
+        
+
+  //搜索课程
+  function search(){
+      console.log("dfsd")
+      var keyword=encodeURI($(".keyword").val());
+      location.href="./stu_lesson_search.html?keyword="+keyword;
+    }
+  
+
+
+  function getVideoList(){
+    $.ajax({
+      type : "get",
+      url : host+"/api/v3/media/student",
+      contentType : "application/json",
+      data: "userId=1",
+      success : function(res) {
+        console.log(res)
+        var data=res.data
+        $(".record").html(' 欢迎您，'+data.username+'！</Br><small>您已学习'+data.learned+'分钟，本季度还需学习'+data.rest+'分钟。</small>')
+        $.each(data.lessonList,function(i,item){
+          $(".list").append('<div class="col-xs-6 col-md-3"><div class="panel panel-default block"><div class="panel-body easypiechart-panel">'+
+                  '<h4>'+item.name+'</h4><a href="./stu_video_learn.html?id='+item.id+'"><img src=http://'+item.coverUrl+' alt="..." class="img-rounded col-xs-12 col-md-12">'+
+                  '</a><h5 style="text-align: left;" class="col-xs-6 col-md-6">共'+item.length+'分钟</br>已学'+item.watchLength+'分钟</h5>'+
+                  '<h5 style="text-align: right;" class="col-xs-6 col-md-6"><a href="./stu_video_learn.html?id='+item.id+'">继续观看</a></h5>'+
+                  '<a href="./stu_video_learn.html?id='+item.id+'"><div style="position:absolute;left:42%;top:30%;">' +
+                  '<span class="glyphicon glyphicon-play-circle" aria-hidden="true" style="font-size: 50px;opacity:0.8;"></span></a>'+
+                  '</div></div></div></div>')
+        })
+        console.log(data.lessonList)
+      },
+      error:function(){
+        // alert();
+      }
+    })
+  }
+
+  //获取全部视频列表
+  var message={
+    pageNumber:1,
+    pageSize:100
+  }
+  getVideoList();
+
+  </script>
+  <style>
+    .block{
+      height: 250px;
+    }
+  </style>
+
+</body>
+</html>
+

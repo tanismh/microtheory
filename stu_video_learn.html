@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>课程播放</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <link href="assets/css/yh.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href='assets/css/font-goole.css' rel='stylesheet' type='text/css' />
+  <!-- <link href="assets/css/video-js.css" rel="stylesheet">  -->
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="./assets/ckplayer.js" charset="UTF-8"></script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper">
+
+      <div class="header"> 
+        <ol class="breadcrumb">
+          <li><a href="./stu_center.html">首页</a></li>
+          <li><a href="./stu_lesson_all.html">所有课程</a></li>
+          <li><a href="#" onclick="toDetail()">课程详情</a></li>
+          <li class="active">课程播放</li>
+        </ol>  
+      </div>
+      <div id="page-inner">
+
+                 
+            <div  style="width: 100%; height: 600px;">
+              <video id="video" src="https://o6yh618n9.qnssl.com/%287%29%20Twitter.MP4" controls="controls" width=100% height=600px>
+                your browser does not support the video tag
+              </video>
+            </div>
+
+      </div>
+            <script type="text/javascript" src="./assets/myplayer.js" charset="UTF-8"></script>          
+       
+      </div><!--/.pager-inner-->
+
+      <div id="footer"></div>
+
+    </div><!--/.page-wrapper-->
+
+  </div><!--/.wrapper-->
+
+
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <!-- Metis Menu Js -->
+  <script src="assets/js/jquery.metisMenu.js"></script>
+  <!-- Custom Js -->
+  <script src="assets/js/custom-scripts.js"></script>
+  <script>
+    function toDetail(){
+      location.href="./stu_lesson_intro.html?id="+id;
+    }
+
+    //搜索课程
+    function search(){
+      // var keyword= $(".keyword").val();
+      // getV("search",keyword)
+      var keyword=encodeURI($(".keyword").val());
+      location.href="./stu_lesson_search.html?keyword="+keyword;
+    }
+    window.onload=function (ev) {
+      var elevideo = document.getElementById("video");
+      elevideo.addEventListener('play', function () { //播放开始执行的函数
+        console.log("开始播放");
+      });
+      var count = 0;
+      var outTime=5;//分钟
+      window.setInterval(go, 1000);
+      function go() {
+        if (! elevideo.paused){
+          count++;
+          if (count == outTime*60) {
+            elevideo.pause();
+            count = 0;
+          }
+        }
+      }
+      document.onmousemove = function (event) {
+        count = 0;
+      };
+      document.onkeydown = function () {
+        count = 0;
+      };
+    }
+
+  </script>
+</body>
+</html>
+<script type="text/javascript" src="assets/js/head/loader.js"></script>

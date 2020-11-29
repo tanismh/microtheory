@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta content="webthemez" name="author" />
+		<title>教师后台</title>
+		<link href="assets/css/bootstrap.css" rel="stylesheet" />
+		<!-- FontAwesome Styles-->
+		<link href="assets/css/font-awesome.css" rel="stylesheet" />
+		<!-- Custom Styles-->
+		<link href="assets/css/custom-styles.css" rel="stylesheet" />
+		<!-- Google Fonts-->
+		<link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<!-- Bootstrap Js -->
+		<script src="assets/js/bootstrap.min.js"></script>
+		<!-- TABLE STYLES-->
+		<link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css"/>
+		<script src="assets/js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$(document).ready(function() {
+				$("#video").removeClass("active-menu");
+				$("#stu").addClass("active-menu");
+
+				$("#sideNav").click(function() {
+					if($(this).hasClass('closed')) {
+						$('.navbar-side').animate({
+							left: '0px'
+						});
+						$(this).removeClass('closed');
+						$('#page-wrapper').animate({
+							'margin-left': '290px'
+						});
+
+					} else {
+						$(this).addClass('closed');
+						$('.navbar-side').animate({
+							left: '-290px'
+						});
+						$('#page-wrapper').animate({
+							'margin-left': '0px'
+						});
+					}
+				});
+
+			});
+		</script>
+		
+		<script type="text/javascript">
+//			function delete(node){
+//				
+//			}
+		</script>
+		<style>
+			section {
+				width: 90%;
+				margin: auto;
+				text-align: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<div id="slid"></div>
+			<div id="header"></div>
+			<div id="page-wrapper" style=" margin: 0 0 0 290px;">
+				<ol class="breadcrumb">
+					<!--  <li><a href="#">个人中心</a></li>
+       <li><a href="#">我的档案</a></li> -->
+					<li class="active">我的学生</li>
+				</ol>
+				<div id="page-inner">
+
+					<div class="row" style="position: relative;">
+
+						<div class="col-md-12">
+							<!-- Advanced Tables -->
+							<div class="panel panel-primry">
+
+								<div class="panel-body">
+									<button type="button" class="btn btn-primary" onclick="batch_check()" style="margin-bottom: 10px">批量考核</button>
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+											<thead>
+												<tr>
+													<th class="table-check"><input type="checkbox" name="all" /></th>
+													<th>姓名</th>
+													<th>班级</th>
+													<th>电话</th>
+													<th>所在党支部</th>
+													<th>视频完成情况</th>
+													<th>心得完成情况</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody id="myStudentsList">
+
+												<tr class="gradeA">
+													<td><input type="checkbox" value="" name="child" /></td>
+													<td>李嘉欣</td>
+													<td>软件1501</td>
+													<td class="center">15967188888</td>
+													<td>党员</td>
+													<td>未完成</td>
+													<td>已完成</td>
+													<td class="center">
+														<button type="button" class="btn btn-info" onclick="javascript:window.location.href='teacher_look_info.html'">查看</button>
+														<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">考核</button>
+														 <!--考核的 模态框-->
+														<div class="check">
+                        									<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+																<div class="modal-dialog" role="document">  
+																	<div class="modal-content">  
+																		<div class="modal-header">  
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+																				<span aria-hidden="true">×</span>  
+																			</button>  
+																			<h4 class="modal-title" id="myModalLabel">考核</h4>  
+																		</div>  
+																		<div class="modal-body">  
+																			等级：<select class="selectpicker">
+																				    <option>优秀</option>
+																				    <option>良好</option>
+																				    <option>合格</option>
+																				</select>
+																				<br />
+																			评语：<textarea class="form-control" cols="60" rows="10" style="margin-top: 20px;"></textarea>
+
+																		</div>  
+																		<div class="modal-footer">  
+																			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+																			<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="check(this);">考核</button>  				                 
+																		</div>  
+																	</div>  
+																</div>  
+															</div>  
+														</div>
+										<script type="text/javascript">
+											function check(node){
+												swal("考核成功！", "","success");
+											}
+										</script>					
+														<!--模态框-->
+														
+													</td>
+												</tr>
+												<tr class="gradeA">
+													<td><input type="checkbox" value="" name="child" /></td>
+													<td>王明</td>
+													<td>软件1502</td>
+													<td class="center">15564526987</td>
+													<td>党员</td>
+													<td>未完成</td>
+													<td>已完成</td>
+													<td class="center">
+														<button type="submit" class="btn btn-info">查看</button>
+														<button type="submit" class="btn btn-primary">考核</button>
+													</td>
+												</tr>
+												<tr class="gradeA">
+													<td><input type="checkbox" value="" name="child" /></td>
+													<td>张三</td>
+													<td>计科1401</td>
+													<td class="center">13798765432</td>
+													<td>党员</td>
+													<td>未完成</td>
+													<td>已完成</td>
+													<td class="center">
+														<button type="submit" class="btn btn-info">查看</button>
+														<button type="submit" class="btn btn-primary">考核</button>
+													</td>
+												</tr>
+												<tr class="gradeA">
+													<td><input type="checkbox" value="" name="child" /></td>
+													<td>张三</td>
+													<td>计科1401</td>
+													<td class="center">13798765432</td>
+													<td>党员</td>
+													<td>未完成</td>
+													<td>已完成</td>
+													<td class="center">
+														<button type="submit" class="btn btn-info">查看</button>
+														<button type="submit" class="btn btn-primary">考核</button>
+													</td>
+												</tr>
+												<tr class="gradeA">
+													<td><input type="checkbox" value="" name="child" /></td>
+													<td>张三</td>
+													<td>计科1401</td>
+													<td class="center">13798765432</td>
+													<td>党员</td>
+													<td>未完成</td>
+													<td>已完成</td>
+													<td class="center">
+														<button type="submit" class="btn btn-info">查看</button>
+														<button type="submit" class="btn btn-primary">考核</button>
+													</td>
+												</tr>
+												<tr class="gradeA">
+													<td><input type="checkbox" value="" name="child" /></td>
+													<td>张三</td>
+													<td>计科1401</td>
+													<td class="center">13798765432</td>
+													<td>党员</td>
+													<td>未完成</td>
+													<td>已完成</td>
+													<td class="center">
+														<button type="submit" class="btn btn-info">查看</button>
+														<button type="submit" class="btn btn-primary">考核</button>
+													</td>
+												</tr>
+												<tr class="gradeA">
+													<td><input type="checkbox" value="" name="child" /></td>
+													<td>张三</td>
+													<td>计科1401</td>
+													<td class="center">13798765432</td>
+													<td>党员</td>
+													<td>未完成</td>
+													<td>已完成</td>
+													<td class="center">
+														<button type="submit" class="btn btn-info">查看</button>
+														<button type="submit" class="btn btn-primary">考核</button>
+													</td>
+												</tr>
+												<tr class="gradeA">
+													<td><input type="checkbox" value="" name="child" /></td>
+													<td>张三</td>
+													<td>计科1401</td>
+													<td class="center">13798765432</td>
+													<td>党员</td>
+													<td>未完成</td>
+													<td>已完成</td>
+													<td class="center">
+														<button type="submit" class="btn btn-info">查看</button>
+														<button type="submit" class="btn btn-primary">考核</button>
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+							</div>
+							<!--End Advanced Tables -->
+						</div>
+					</div>
+					<!-- /. ROW  -->
+
+				</div>
+				<!--/.pager-inner-->
+
+				<div id="footer"></div>
+
+			</div>
+			<!--/.page-wrapper-->
+
+		</div>
+		<!--/.wrapper-->
+<script src="assets/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="assets/js/head/loader_teacher.js"></script>
+<!--<script src="assets/js/dataTables/jquery.dataTables.js"></script>-->
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+  $(document).ready(function() {
+  $('#dataTables-example').dataTable();
+    });
+  /* 绑定全选按钮 */
+
+  $(':checkbox[name=all]').click(function() {
+
+  if(this.checked) {
+    $(':checkbox').prop("checked", true);
+
+  } else {
+
+    $(':checkbox').prop("checked", false);
+  }
+  });
+
+  function batch_check() {
+	  // console.log($(':checkbox:checked'))
+	  if ($(':checkbox:checked').length == 0){
+	  	alert("未选中学生")
+	  }else{
+		  $('#myModal').modal()
+	  }
+  }
+</script>
+<script>
+  //从后台获取学生数据
+$(document).ready(function() {
+  $.ajax({
+    type : "GET",
+    url : host+"/api/teachers/stu?teacherId="+1,
+    contentType : "application/json",
+    dataType : "json",
+    success : function(data) {
+//        alert(JSON.stringify(data))
+      if (data.code == "200") {
+        showList(data);
+        return true
+      }
+    },
+    error :function () {
+      sweetAlert("警告", "服务器连接出错！");}
+  });
+  setTimeout(function(){$('#example1').dataTable({
+    "lengthChange": false,//页数选择功能关闭
+    "sPaginationType" : "full_numbers",//显示首页和尾页
+    "aaSorting" : [[1, "asc"]], //默认的排序方式：第2列升序排列。即按姓名首字母排序
+  });},500)
+});
+
+  //渲染学生列表
+  function showList(data) {
+    $("#myStudentsList").html("");
+    $.each(data.data, function (i, value) {
+
+      $("#studentsList").append(
+        '<tr><td><input type="checkbox"></td><td>' + value.studentName + '</td><td>' + value.className + '</td><td>' + value.longPhone + '</td><td>' + value.branchId + '</td><td>' +
+        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">' +
+        '<span class="glyphicon glyphicon-user" id="' + value.studentId + '"  onclick="lookStu(' + value.studentId + ');">' +
+        '查看</span></button>' +
+        '<button type="button" class="btn btn-danger" id="del">' +
+        '<span class="btn btn-primary" pkAdm="' + value.studentId + '" onclick="check(this)">考核</span>' + '</button>' +
+        '</td></tr>'
+      );
+    });
+  }
+  //查看学生详情
+  function lookStu(id) {
+    window.location.href="teacher_look_info.html?id="+id;
+
+  }
+
+  //单个考核学生
+  function check(node) {
+
+  }
+</script>
+
+    </body>
+
+</html>

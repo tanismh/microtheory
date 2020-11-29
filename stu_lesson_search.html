@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>全部课程</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <link href="assets/css/yh.css" rel="stylesheet" />
+  <!-- 分页 -->
+  <link href="assets/css/pagination.css" rel="stylesheet"> 
+  <link href="assets/css/video-js.css" rel="stylesheet"> 
+</head>
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+
+      <div class="header"> 
+        <ol class="breadcrumb">
+          <!-- <li><a href="#">Home</a></li> -->
+          <li class="active">搜索课程</li>
+          <div class="dropdown navbar-right" style="position:relative;bottom:8px;right:10px;">
+			  <!-- <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			   <span class="cateName">按类别搜索</span> 
+			  <span class="caret"></span>
+        </button> -->
+			  <!-- <ul class="dropdown-menu category" aria-labelledby="dropdownMenu1">
+			    <li><a href="#" onclick="searchCourse('毛概')">毛概</a></li>
+			    <li><a href="#">历史</a></li>
+			    <li><a href="#">马原</a></li>
+			  </ul> -->
+			</div> 
+        </ol> 
+      </div>
+      <div id="page-inner" style="text-align: center;">
+
+      <div class="row" id="list">
+
+
+
+      </div>
+
+      <div class="M-box" id="pagination" style="display: inline-block;margin:0 auto;"></div>
+
+
+
+    <div id="footer"></div>
+
+    </div><!--/.pager-inner-->
+
+    </div><!--/.page-wrapper-->
+
+    </div><!--/.wrapper-->
+
+<script src="assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script src="assets/js/custom-scripts.js"></script>
+<script src="assets/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="assets/js/head/loader.js"></script>
+<script>
+
+    
+
+    //按分类查询视频
+    function searchCourse(val,name){
+      
+        $(".cateName").html(name)
+        getV(val);
+        
+    }
+
+    //搜索课程
+    function search(){
+      var keyword= $(".keyword").val();
+      getV("search",keyword)
+    }
+    
+    var words=location.href.split("?")[1];
+    var keyword=decodeURI(words.split("=")[1]);
+    getV("search",keyword);
+
+    //获取视频
+    function getV(){
+      
+            var totalPage = 1; //总共多少页  
+            var totalRecords = 1; //总共多少条  
+            var pageSize = 6; //每页显示多少页  
+            var message={
+                  pageNum:1,
+                  pageSize:pageSize,
+            }
+            if(arguments.length==1){
+              message.categoryId=arguments[0]
+            }else{
+              message.keyword=arguments[1];
+            }
+            
+            loadList(1,message);
+            function loadList(pno,mes) {
+                mes.pageNumber=pno
+                $.ajax({
+                    type: "get",
+                    url: host+"/api/v3/media/",
+                    data:message,
+                    success: function (result) {
+                      console.log(result)
+                        var count = result.totalCount;
+                        totalRecords = count;
+                        totalPage = Math.ceil(count / pageSize);
+                        var datalist = "";
+                        $.each(result.data.list, function (i, item) {
+                          datalist+='<div class="col-xs-6 col-md-3">'+
+              '<div class="panel panel-default">'+
+              '<div class="panel-body easypiechart-panel">'+
+              '<a href="./stu_lesson_intro.html?id='+item.id+'"><img src="assets/img/lesson2.jpg" alt="..." class="img-rounded col-xs-12 col-md-12"></a>'+
+              '<h4 style="text-align: left;" class="col-xs-12 col-md-12">'+item.name+'</h4>'+
+              '<h5 style="text-align: left;" class="col-xs-6 col-md-6">总时长：'+item.length+'分钟</h5>'+
+              '<h5 style="text-align: right;" class="col-xs-6 col-md-6"><a href="./stu_lesson_intro.html?id=id='+item.id+'">开始观看</a></h5>'+
+              '<div style="position:absolute;left:42%;top:25%;">'+
+                '<span class="glyphicon glyphicon-play-circle" aria-hidden="true" style="font-size: 50px;opacity:0.8;"></span>'+
+              '</div></div></div></div>'
+
+                        })
+                        $("#list").html(datalist);
+                        $('.M-box').pagination({
+                            pageCount: totalPage,
+                            current: pno, //当前第几页  
+                            jump: true,
+                            coping: true,
+                            homePage: '首页',
+                            endPage: '末页',
+                            prevContent: '上页',
+                            nextContent: '下页',
+                            callback: PageClick
+                        });
+                        //}             
+                    }
+                });
+            }
+            //回调函数    
+            PageClick = function (index) {
+                //$('.now').text(index.getCurrent());   
+                loadList(index.getCurrent(),message); //点击分页加载列表数据  */  
+            }
+    }
+          
+
+          
+
+  var datalist='<div class="col-xs-6 col-md-3"><div class="panel panel-default"><div class="panel-body easypiechart-panel"><img src="assets/img/lesson2.jpg" alt="..." class="img-rounded col-xs-12 col-md-12"><h4 style="text-align: left;" class="col-xs-12 col-md-12">深入开展两学一做教育</h4><h5 style="text-align: left;" class="col-xs-6 col-md-6">讲师：张小明</h5><h5 style="text-align: right;" class="col-xs-6 col-md-6"><a href="#">开始观看</a></h5><div style="position:absolute;left:42%;top:25%;"><span class="glyphicon glyphicon-play-circle" aria-hidden="true" style="font-size: 50px;opacity:0.8;"></span></div></div></div></div>'
+</script>
+</body>
+</html>
+

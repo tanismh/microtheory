@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="webthemez" name="author" />
+  <title>系统用户管理</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script> 
+  <script src="assets/js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
+  <!-- TABLE STYLES-->
+  <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+  <script> 
+    $(document).ready(function(){
+      //侧边栏选定系统用户
+      $("#video").removeClass("active-menu");
+      $("#user").addClass("active-menu");
+      //收起侧边栏
+      $("#sideNav").click(function(){
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});         
+        }
+        else{
+          $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+
+    });
+  </script> 
+  <style>
+    .form-group{
+          height: 30px;
+        }
+    section {
+      width: 90%;
+      margin: auto;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+      <ol class="breadcrumb">
+       <!--  <li><a href="#">个人中心</a></li>
+       <li><a href="#">我的档案</a></li> -->
+       <li class="active">系统用户管理</li>
+      </ol>
+      <div id="page-inner">
+      <div class="row">
+        <div class="panel panel-default col-sm-6">
+          <div class="panel-heading">修改用户基本信息</div>
+          <div class="panel-body">
+
+            <div class="form-group">
+              <label for="username" class="col-sm-2 control-label">学号</label>
+              <div class="col-sm-10">
+                <input type="name" class="form-control" id="username" placeholder="1511040109">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="col-sm-2 control-label">姓名</label>
+              <div class="col-sm-10">
+                <input type="name" class="form-control" id="username" placeholder="苗瑞强">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="col-sm-2 control-label">密码</label>
+              <div class="col-sm-10">
+              <button type="submit" class="btn btn-default">重置</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="col-sm-2 control-label" style="padding-right: 0px;">手机号</label>
+              <div class="col-sm-10">
+                <input type="name" class="form-control" id="username" placeholder="15512345678">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="panel panel-default col-sm-6">
+          <div class="panel-heading">为用户分配权限</div>
+          <div class="panel-body">
+            <div class="form-group">
+              <input type="checkbox" value="1" name="child"/>
+              <label for="username" class="control-label">视频管理</label>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" value="2" name="child"/>
+              <label for="username" class="control-label">音频管理</label>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" value="3" name="child"/>
+              <label for="username" class="control-label">教师管理</label>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" value="4" name="child"/>
+              <label for="username" class="control-label">学生管理</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-danger btn-lg" style="float: right;" id="save">保存</button>
+      </div><!-- /. ROW  -->
+
+      </div><!--/.pager-inner-->
+    <div id="footer"></div>
+    </div><!--/.page-wrapper-->
+
+</div><!--/.wrapper-->
+<script src="assets/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="assets/js/head/loader_admin.js"></script>
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+  $(document).ready(function () {
+  });
+  $('#save').click(function(){
+   window.location.href="admin_user.html";
+  });
+</script>
+
+</body>
+</html>

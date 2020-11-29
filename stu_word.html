@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>读书心得</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <link href="assets/css/video-js.css" rel="stylesheet"> 
+  <link href="assets/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script> 
+    $(document).ready(function(){
+      $("#center").removeClass("active-menu");
+      $("#word").addClass("active-menu");
+
+      $("#sideNav").click(function(){
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});
+          
+        }
+        else{
+            $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+  });
+  </script> 
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+      <ol class="breadcrumb">
+          <li><a href="#">个人中心</a></li>
+          <li><a href="#">我的档案</a></li>
+          <li class="active">读书心得</li>
+      </ol>
+    <div id="page-inner">
+
+               
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+												<iframe src="stu_word_list.html" width="100%" height="1200" scrolling="auto" frameborder="0"></iframe>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+
+
+</div><!--/.pager-inner-->
+
+      <div id="footer"></div>
+
+    </div><!--/.page-wrapper-->
+
+ </div><!--/.wrapper-->
+   
+  <script type="text/javascript" src="assets/js/head/loader.js"></script>
+
+  <script>
+      $(function(){
+           //切割id
+    		var words=location.href.split("?")[1];
+    		var id=words.split("=")[1];
+    		//传给iframe
+    		var childFrameObj = document.getElementById('childFrame');
+    		childFrameObj.contentWindow.paramFromParent = id;
+      });
+  </script>
+</body>
+</html>

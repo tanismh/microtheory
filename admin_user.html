@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="webthemez" name="author" />
+  <title>系统用户管理</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script> 
+  <script src="assets/js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
+  <!-- TABLE STYLES-->
+  <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+  <script> 
+    $(document).ready(function(){
+      //侧边栏选定系统用户
+      $("#video").removeClass("active-menu");
+      $("#user").addClass("active-menu");
+      //收起侧边栏
+      $("#sideNav").click(function(){
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});         
+        }
+        else{
+          $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+
+    });
+  </script> 
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+      <ol class="breadcrumb">
+       <!--  <li><a href="#">个人中心</a></li>
+       <li><a href="#">我的档案</a></li> -->
+       <li class="active">系统用户管理</li>
+     </ol>
+     <div id="page-inner">
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Advanced Tables -->
+          <div class="panel panel-primry">
+            <div class="panel-head" style="position: relative; top:10px;left: 15px;">
+              <button class="btn btn-default" id="addNew">新增</button>
+            </div>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                  <thead>
+                    <tr>
+                      <th class="table-check"><input type="checkbox" name="all" /></th>
+                      <th>工号</th>
+                      <th>姓名</th>
+                      <th>电话</th>
+                      <th>考核状态</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr class="gradeA">
+                      <td><input type="checkbox" value="" name="child"/></td>
+                      <td>Gecko</td>
+                      <td>Firefox 1.5</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center"> 
+                        <button type="submit" class="btn btn-primary editBtn">编辑</button>
+                        <button type="submit" class="btn btn-danger deleteBtn">删除</button>
+                      </td>
+                    </tr>
+                    <tr class="gradeA">
+                      <td><input type="checkbox" value="" name="child"/></td>
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">
+                        <button type="submit" class="btn btn-primary editBtn">编辑</button>
+                        <button type="submit" class="btn btn-danger deleteBtn">删除</button>
+                      </td>
+                    </tr>              
+                    <tr class="gradeU">
+                      <td><input type="checkbox" value="" name="child"/></td>
+                      <td>Other browsers</td>
+                      <td>All others</td>
+                      <td>-</td>
+                      <td class="center">-</td>
+                      <td class="center">
+                        <button type="submit" class="btn btn-primary editBtn">编辑</button>
+                        <button type="submit" class="btn btn-danger deleteBtn">删除</button>
+                      </td>
+                    </tr>
+                    <tr class="gradeU">
+                      <td><input type="checkbox" value="" name="child"/></td>
+                      <td>Other browsers</td>
+                      <td>All others</td>
+                      <td>-</td>
+                      <td class="center">-</td>
+                      <td class="center">
+                        <button type="submit" class="btn btn-primary editBtn">编辑</button>
+                        <button type="submit" class="btn btn-danger deleteBtn">删除</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div><!--End Advanced Tables -->
+        </div>
+      </div><!-- /. ROW  -->
+
+    </div><!--/.pager-inner-->
+
+    <div id="footer"></div>
+
+  </div><!--/.page-wrapper-->
+
+</div><!--/.wrapper-->
+
+<script src="assets/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="assets/js/head/loader_admin.js"></script>
+<!--<script src="assets/js/dataTables/jquery.dataTables.js"></script>-->
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#dataTables-example').dataTable({
+      "iDisplayLength" : 25, //默认显示的记录数
+      "sPaginationType" : "full_numbers",//显示首页和尾页
+      "bSort" : true, //是否启动各个字段的排序功能
+      "aaSorting" : [[1, "asc"],[2, "asc"]], //默认的排序方式，第2列，升序排列
+      "lengthChange": false,//页数选择功能关闭
+      "pageLength": 15,//初始页数
+    });
+  });
+  /* 绑定全选按钮 */
+  $(':checkbox[name=all]').click(function(){
+    if(this.checked){
+      $(':checkbox').prop("checked",true);
+    }else{
+      $(':checkbox').prop("checked",false) ;
+    }
+  });
+  /* 删除确认*/
+  $('.deleteBtn').click(function(){
+   swal({ 
+          title: "确定删除吗？", 
+          text: "你将无法恢复该虚拟文件！", 
+          type: "warning",
+          showCancelButton: true, 
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "确定删除！", 
+          cancelButtonText: "取消删除！",
+          closeOnConfirm: false, 
+          closeOnCancel: false        
+        },
+        function(isConfirm){ 
+          if (isConfirm) { 
+            swal("删除！", "该用户已经被删除。",
+        "success"); 
+          } else { 
+            swal("取消！", "已取消删除:)",
+        "error"); 
+          } 
+        });
+  });
+  /* 编辑*/
+  $('.editBtn').click(function(){
+   window.location.href="admin_user_edit.html";
+  });
+</script>
+
+</body>
+</html>

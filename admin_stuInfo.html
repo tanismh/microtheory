@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="webthemez" name="author" />
+    <title>学生管理</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- TABLE STYLES-->
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css"/>
+    <script src="assets/js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      $(document).ready(function(){
+        $("#video").removeClass("active-menu");
+        $("#stu").addClass("active-menu");
+
+        $("#sideNav").click(function(){
+          if($(this).hasClass('closed')){
+            $('.navbar-side').animate({left: '0px'});
+            $(this).removeClass('closed');
+            $('#page-wrapper').animate({'margin-left' : '290px'});
+
+          }
+          else{
+            $(this).addClass('closed');
+            $('.navbar-side').animate({left: '-290px'});
+            $('#page-wrapper').animate({'margin-left' : '0px'});
+          }
+        });
+
+      });
+    </script>
+    <style>
+        section {
+            width: 90%;
+            margin: auto;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+        <ol class="breadcrumb">
+            <li><a href="teacher_look_all_student.html">我的学生</a></li>
+            <li class="active">学生档案</li>
+            <div class="navbar-right" style="position:relative;bottom:8px;right:10px;">
+
+            </div>
+        </ol>
+
+        <div id="page-inner">
+            <!--传id  ?id='+id'    -->
+            <iframe src="stu_info.html?id='+id'" width="100%" height="1200" scrolling="auto" frameborder="0" id="childFrame"></iframe>
+        </div><!--/.pager-inner-->
+
+        <div id="footer"></div>
+
+    </div><!--/.page-wrapper-->
+
+</div><!--/.wrapper-->
+
+<script src="assets/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="assets/js/head/loader_admin.js"></script>
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#dataTables-example').dataTable();
+  });
+  /* 绑定全选按钮 */
+  $(':checkbox[name=selectAll]').click(function(){
+    if(this.checked){
+      $(':checkbox').prop("checked",true);
+    }else{
+      $(':checkbox').prop("checked",false) ;
+    }
+  });
+
+</script>
+
+</body>
+<script type="text/javascript">
+    //切割id
+    var words=location.href.split("?")[1];
+    var id=words.split("=")[1];
+    //传给iframe
+    var childFrameObj = document.getElementById('childFrame');
+    childFrameObj.contentWindow.paramFromParent = id;
+
+
+</script>
+
+</html>

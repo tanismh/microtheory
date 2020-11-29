@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="" name="description" />
+  <meta content="webthemez" name="author" />
+  <title>课程播放</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <link href="assets/css/video-js.css" rel="stylesheet"> 
+   <script> 
+    $(document).ready(function(){
+
+      $("#sideNav").click(function(){
+
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});
+          
+        }
+        else{
+            $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+  });
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper"style=" margin: 0 0 0 290px;">
+
+
+      <div class="header"> 
+        <ol class="breadcrumb">
+          <li><a href="#">首页</a></li>
+          <li><a href="lesson_all.html">所有课程</a></li>
+          <li><a href="lesson_intro.html">课程详情</a></li>
+          <li class="active">课程播放</li>
+        </ol>  
+      </div>
+      <div id="page-inner" >
+
+        <div class="col-xs-6 col-md-6">
+          <video id="my-video" class="video-js" controls preload="auto" width="740" height="400"
+          poster="assets/img/m.png" data-setup="{}">
+          <source src="http://jq22com.qiniudn.com/jq22-sp.mp4" type="video/mp4">
+            <p class="vjs-no-js">
+              To view this video please enable JavaScript, and consider upgrading to a web browser that
+              <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+          </video>
+          <script src="assets/js/videojs/video.min.js"></script> 
+          <script type="text/javascript">
+            var myPlayer = videojs('my-video');
+            videojs("my-video").ready(function(){
+              var myPlayer = this;
+              myPlayer.play();
+            });
+          </script>
+        </div>
+
+        <div class="col-xs-6 col-md-6">
+          <div class="panel panel-default" style="padding: 10px;">
+              <h2>毛概主要思想</h2>
+              <h5>共50分钟</h5>
+              <h5>讲师：王小明</h5>
+              <h5>课程类别：毛概</h5>
+              <h5>课程概述：</h5>
+              <p style="padding-top: 5px;">介绍Linux基础知识概念及基本操作技巧，以期能够熟练掌握Linux系统的使用、管理、维护及相关原理。内容将包括Linux基本操作、磁盘及文件系统管理、用户权限、网络、软件管理及多命令协作等等基础知识。</p>
+          </div>
+        </div>
+
+      </div><!--/.pager-inner-->
+      <div id="footer"></div>
+
+    </div><!--/.page-wrapper-->
+
+  </div><!--/.wrapper-->
+
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <!-- Metis Menu Js -->
+  <script src="assets/js/jquery.metisMenu.js"></script>
+  <!-- Custom Js -->
+  <script src="assets/js/custom-scripts.js"></script>
+  
+</body>
+</html>
+<script type="text/javascript" src="assets/js/head/loader.js"></script>

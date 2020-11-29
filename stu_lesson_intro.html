@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>课程详情</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <link href="assets/css/video-js.css" rel="stylesheet"> 
+</head>
+<body>
+  <div id="wrapper">
+      <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper">
+
+      <div class="header"> 
+        <ol class="breadcrumb">
+          <li><a href="./stu_center.html">首页</a></li>
+          <li><a href="./lesson_all.html">全部课程</a></li>
+          <li class="active">课程详情</li>
+        </ol>  
+      </div>
+      <div id="page-inner">
+        <div class="panel panel-primary">
+          <img src="assets/img/lesson1.jpg" alt="..." class="img-rounded col-xs-5 col-md-5">
+          <div class="col-xs-7 col-md-7">
+            <h2 style="margin-bottom: 10px;" class="courseName">毛概主要思想</h2>
+            <h5 class="courseTime">共50分钟</h5>
+            <!-- <h5 class="courseTeacher">讲师：王小明</h5> -->
+            <h5 class="courseCategory">课程类别：毛概</h5>
+            <h5 >课程概述：</h5>
+            <p style="padding-top: 5px;" class="courseDiscripution">介绍Linux基础知识概念及基本操作技巧，以期能够熟练掌握Linux系统的使用、管理、维护及相关原理。内容将包括Linux基本操作、磁盘及文件系统管理、用户权限、网络、软件管理及多命令协作等等基础知识。</p>
+            <button type="button" class="btn btn-primary" onclick="toVideo()">开始学习</button>
+            <button type="button" class="btn btn-primary continue" onclick="toVideo()" style="visibility: hidden;">继续学习</button>
+          </div>
+        </div>
+    
+
+      </div><!--/.pager-inner-->
+
+      <div id="footer"></div>
+
+
+    </div><!--/.page-wrapper-->
+
+  </div><!--/.wrapper-->
+
+<script src="assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script src="assets/js/custom-scripts.js"></script>
+<script type="text/javascript" src="assets/js/head/loader.js"></script>
+<script>
+
+  var words=location.href.split("?")[1];
+  var id=words.split("=")[1];
+
+  function toVideo(){
+    location.href="./stu_video_learn.html?id="+id;
+  }
+
+  //搜索课程
+  function search(){
+      // var keyword= $(".keyword").val();
+      // getV("search",keyword)
+      var keyword=encodeURI($(".keyword").val());
+      location.href="./stu_lesson_search.html?keyword="+keyword;
+    }
+
+  //获取课程id
+  var words=location.href.split("?")[1];
+  var id=words.split("=")[1]
+
+   //获取视频分类
+   var category=[];
+   var message={
+        pageNumber:1,
+        pageSize:100
+    }
+
+    $.ajax({
+        type: "get",
+        url: host+"/api/v3/media/detail?mediaId="+id,
+        success: function(res) {
+          console.log(res);
+          $(".courseName").text(res.data.name)
+          $(".courseTime").text("共"+res.data.length+"分钟")
+          $(".courseDiscripution").text(res.data.introduce)
+          $(".img-rounded").attr("src", host + "/api/v3/media/" +res.data.mediaUrl)
+
+        }
+    })
+
+     
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,130 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>读书心得</title>
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="assets/js/bootstrap.min.js" rel="stylesheet" />
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <style type="text/css">
+    	body{
+    		background-color: transparent;
+    	}
+    </style>
+    
+</head>
+<body>
+	                    <!-- Advanced Tables -->
+                    <div class="panel panel-default" style="height: 100%;">
+                        <div class="panel-heading">
+                            
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>读书心得</th>
+                                            <th>操作</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="wordList">
+                                        <tr class="even gradeA">
+                                            <td>20171003李嘉欣读书心得</td>
+                                            <td>
+                                            	<button type="button" class="btn btn-primary">
+                                            	<span class="glyphicon glyphicon-download-alt" pkAdm="value.documentId+" onclick="download(this)">
+                                            		下载
+                                            	</span>
+                                            	</button>
+                                                <button type="button" class="btn btn-primary">
+                                            	<span class="glyphicon glyphicon-pencil" pkAdm="value.documentId+" onclick="showWord(this)">
+                                            		查看
+                                            	</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+<!--                        <a href="#" style="color: black"><button>dd</button></a>-->
+                    <!--End Advanced Tables -->
+        <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+     <!-- DATA TABLE SCRIPTS -->
+<!--    <script src="assets/js/dataTables/jquery.dataTables.js"></script>-->
+    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script>
+  					var host="http://10.21.30.218:8080";
+            $(document).ready(function () {
+                var id = window.paramFromParent;
+                $.ajax({
+                type : "GET",
+                url : host+"/api/v3/document/documents",
+                data: "userId=1",
+                success : function(data) {
+                    //alert(JSON.stringify(data));
+                  if (data.code == "200") {
+                    showList(data);
+                    return true;
+                    }
+                },
+                  error :function () {
+                    //sweetAlert("警告", "服务器连接出错！");
+                    alert("出错了");
+                   }
+              });
+            });
+  						
+  	//显示读书心得列表
+  	function showList(data) {
+      $("#wordList").html("");
+      $.each(data.data, function(i, value) {
+        $("#wordList").append(
+          '<tr class="gradeA"><td>'+value.documentName+'</td><td><button type="button" class="btn btn-primary">'+
+          '<span class="glyphicon glyphicon-download-alt" pkAdm="'+value.documentId+
+          '" docUrl="'+value.documentUrl+'" onclick="download(this)"><a style="color: white;text-decoration:none" target="_blank" href=http://'+value.documentUrl+' >下载</a></span></button></td></tr>'
+        );
+      });
+    }
+  	
+  	//点击下载按钮
+  	function download(node){
+		var documentId=node.getAttribute("pkAdm");
+		var documentUrl=node.getAttribute("docUrl");
+		var docUrl="http://10.21.30.218:8080/"+documentUrl;
+    var $eleForm = $("<form method='get'></form>");
+
+            $eleForm.attr("action",docUrl);
+
+            $(document.body).append($eleForm);
+
+            //提交表单，实现下载
+            $eleForm.submit();
+       
+  	}
+    //点击查看按钮
+    function showWord(node){
+        window.location.href="./stu_word_view.html"
+    }
+
+    </script>
+         <!-- Custom Js -->
+    <!--<script src="assets/js/custom-scripts.js"></script>-->
+</body>

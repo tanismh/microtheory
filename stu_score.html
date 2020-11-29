@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的成绩</title>
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom Styles-->
+  <link href="assets/css/custom-styles.css" rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href="assets/css/font-goole.css" rel='stylesheet' type='text/css' />
+  <script src="assets/js/jquery-1.10.2.js"></script>
+  <!-- Bootstrap Js -->
+  <script src="assets/js/bootstrap.min.js"></script> 
+  <script src="assets/js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
+  <!-- TABLE STYLES-->
+  <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+  <script> 
+    $(document).ready(function(){
+      //侧边栏选定系统用户
+      $("#center").removeClass("active-menu");
+      $("#score").addClass("active-menu");
+      //收起侧边栏
+      $("#sideNav").click(function(){
+        if($(this).hasClass('closed')){
+          $('.navbar-side').animate({left: '0px'});
+          $(this).removeClass('closed');
+          $('#page-wrapper').animate({'margin-left' : '290px'});         
+        }
+        else{
+          $(this).addClass('closed');
+          $('.navbar-side').animate({left: '-290px'});
+          $('#page-wrapper').animate({'margin-left' : '0px'}); 
+        }
+      });
+
+    });
+  </script> 
+  <style>
+  	.table>tbody>tr>td{vertical-align:middle;height: 30px;}
+  	p{font-size: 14px;padding-top: 10px;}
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="slid"></div>
+    <div id="header"></div>
+    <div id="page-wrapper" style=" margin: 0 0 0 290px;">
+      <ol class="breadcrumb">
+       <li><a href="./stu_center.html">个人中心</a></li>
+       <li class="active">我的成绩</li>
+      </ol>
+      <div id="page-inner">
+        <div class="row"><!-- /. ROW  -->
+          <div class="col-md-12">
+            <!--    Striped Rows Table  -->
+            <div class="panel">
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <div class="form-group" style="margin-bottom: 20px;padding-bottom: 25px">
+                    <div class="col-sm-10">
+                      <select  class="form-control " id="quter">
+<!--                        <option value="1" style="text-align: center">2019-2020第一季度</option>-->
+<!--                        <option value="1" style="text-align: center">2019-2020第二季度</option>-->
+                      </select>
+                    </div>
+                    <div class="col-sm-2">
+                      <button type="button" class="btn btn-info" id="checkSc">查询</button>
+                    </div>
+                  </div>
+                  <table class="table table-bordered table-hover" style="text-align: center">
+                    <thead>
+                    <tr style="text-align: center">
+                      <th style="text-align: center">等级</th>
+                      <th style="text-align: center">评语</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tb">
+<!--                    <tr>-->
+<!--                      <td>优秀</td>-->
+<!--                      <td>继续努力，很好很好非常好</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td>2</th>-->
+<!--                      <td>Jacob</td>-->
+<!--                    </tr>-->
+                    </tbody>
+                  </table>
+                    <div id="noSc" align="center" style="font-weight: bold" >暂无成绩</div>
+                </div>
+              </div>
+            </div>
+            <!--  End  Table  -->
+          </div>
+        </div><!-- /. ROW  -->
+      </div><!--/.pager-inner-->
+      <div id="footer"></div>
+    </div><!--/.page-wrapper-->
+  </div><!--/.wrapper-->
+<script type="text/javascript" src="assets/js/head/loader.js"></script>
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+    $("#checkSc").click(function () {
+        $.ajax({
+            type : "get",
+            url : "http://10.21.30.218:8080/api/v3/evaluation/quarter?userId=1&quarterId="+$("#quter option:selected").val(),
+            contentType : "application/json",
+            dataType : "json",
+            success:function (res) {
+                $("#tb").html("")
+                $("#noSc").css('display','none');
+            console.log(res)
+                if (res.data.length!=0){
+                    $.each(res.data,(index, item)=>{
+                        $("#tb").append(
+                            "<tr>\n" +
+                            "                      <td>"+item.grade+"</td>\n" +
+                            "                      <td>"+item.evaluationContent+"</td>\n" +
+                            "                    </tr>"
+                        )
+                    })
+                }else{
+                    $("#noSc").css('display','block');
+                }
+            }
+        })
+    })
+  $(document).ready(function () {})
+ //    $('#dataTables-example').dataTable();
+ //    var words=location.href.split("?")[1];
+ //    var id=words.split("=")[1];
+ //    var message={
+ //      pageNumber:1,
+ //      pageSize:100,
+	// 		keyword: "cQs8yliTGT",
+	// 		studentId: 1
+ //    }
+ //    $.ajax({
+ //        type : "GET",
+ //        url : host+"/api/score",
+ //        data: message,
+ //        success : function(data) {
+ //       // alert(JSON.stringify(data))
+ //          if (data.code == "200") {
+ //            showList(data);
+ //            return true
+ //          }
+ //        },
+ //        error :function () {
+ //          sweetAlert("警告", "服务器连接出错！");}
+ //      });
+ //  });
+ //
+ //  $('#save').click(function(){
+ //   window.location.href="admin_user.html";
+ // });
+ // function showList(data) {
+ //      $("#socreList").html("");
+ //      $.each(data.data, function(i, value) {
+ //          console.log("dfafd")
+ //        $("#socreList").append(
+ //          '<tr class="gradeA"><td class="center">'+value.quarterName+'</td><td class="center">'+
+ //          value.grade+'</td><td class="center"><p>'+value.evaluationContent+'</p></td></tr>'
+ //        );
+ //      });
+ //
+ //    }
+
+
+  $.ajax({
+    type : "get",
+    url : "http://10.21.30.218:8080/api/v3/quarter/quarters",
+    data: "userId=1",
+    contentType : "application/json",
+    dataType : "json",
+    success : function(data) {
+      console.log(data)
+      $.each(data.data,(index,item)=>{
+        $("#quter").append(
+                "<option  style=\"text-align: center\" value="+item.quarterId+">"+item.quarterName+"</option>"
+        )
+      })
+
+    },
+    error :function () {
+      sweetAlert("警告", "服务器连接出错！");}
+  });
+    
+</script>
+
+</body>
+</html>
